@@ -8,4 +8,5 @@ body {
 #particles-js {
     height: 100%;
     float: none;
+    background-size: auto;
 }
