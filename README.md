@@ -13,4 +13,4 @@ The whole site uses JavaScript ES6 powerfullness, it will be soon implemented wi
 
 Everything is located in the local storage
 
-## The site is currently just for friends and family.
+## The site is currently just for friends and family
