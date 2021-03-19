@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo&family=Bebas+Neue&display=swap');
+
+*{
+    font-family: 'Bebas Neue', cursive;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -10,3 +15,35 @@ body {
     float: none;
     background-size: auto;
 }
+
+.wrapper{
+    margin-left: 560px; margin-top: 340px; 
+}
+
+.wrapper-selector{
+    margin-top: 350px;
+    margin-left: 800px;
+}
+
+.wrapper-registration{
+    margin-left: 700px;
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+       margin:auto;
+       margin-top: 140px;
+       margin-left: 50px;
+    }
+
+    .img{
+        display: none;
+    }
+
+    .wrapper-selector{
+        margin:auto;
+       margin-top: 300px;
+       margin-left: 100px;
+    }
+  }
+
