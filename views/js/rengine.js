@@ -14,7 +14,7 @@ maker.addEventListener('click', function() {
        const error = document.getElementById('error')
        error.innerHTML = ''
        if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
-
+        main.innerHTML = formMInfos
        }
        else error.innerHTML = user
     })
@@ -30,7 +30,7 @@ lover.addEventListener('click', function() {
        const error = document.getElementById('error')
        error.innerHTML = ''
        if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
-
+        main.innerHTML = formLInfos
        }
        else error.innerHTML = user
     })
@@ -185,5 +185,101 @@ const formM = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-re
 </div>
 </div>`
 
-const formP = ``
+const formMInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
+<div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign up food-maker!</h1>
+        <form>
+        <input 
+        type="text"
+        class="block border border-grey-light w-full p-3 rounded mb-4"
+        id="restaurantName"
+        placeholder="Restaurant name" />
+
+        <input 
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            id="restaurantDescription"
+            placeholder="Restaurant description" />
+
+        <input 
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            id="restaurantLocation"
+            placeholder="Restaurant location" />
+
+
+            <label class="text-red-500" for="registrationlover2" id="errorR2"></label>
+            <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover2">
+        </form>
+        <div class="text-center text-sm text-grey-dark mt-4">
+            By signing up, you agree to the 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
+                Terms of Service
+            </a> and 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
+                Privacy Policy
+            </a>
+        </div>
+    </div>
+
+    <div class="text-grey-dark mt-6">
+        Already have an account? 
+        <a class="no-underline border-b border-blue text-blue hover:text-purple-600" href="./login.html">
+            Log in
+        </a>.
+    </div>
+</div>
+</div>`
+
+const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
+<div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+        <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>
+        <form>
+        <input 
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            id="address"
+            placeholder="Address" />
+
+        <input 
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            id="cardNumber"
+            placeholder="Card number" />
+            <input 
+                type="text"
+                class="block border border-grey-light w-full p-3 rounded mb-4"
+                id="cardCvv"
+                placeholder="cvv" />
+                <input 
+                    type="text"
+                    class="block border border-grey-light w-full p-3 rounded mb-4"
+                    id="cardName"
+                    placeholder="Name on the card" />
+
+
+            <label class="text-red-500" for="registrationlover2" id="errorL2"></label>
+            <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover2">
+        </form>
+        <div class="text-center text-sm text-grey-dark mt-4">
+            By signing up, you agree to the 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
+                Terms of Service
+            </a> and 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
+                Privacy Policy
+            </a>
+        </div>
+    </div>
+
+    <div class="text-grey-dark mt-6">
+        Already have an account? 
+        <a class="no-underline border-b border-blue text-blue hover:text-purple-600" href="./login.html">
+            Log in
+        </a>.
+    </div>
+</div>
+</div>`
 //#endregion
