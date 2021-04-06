@@ -1,54 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Arvo&family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Bebas+Neue&display=swap");
 
-*{
-    font-family: 'Bebas Neue', cursive;
+* {
+  font-family: "Bebas Neue", cursive;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 
 #particles-js {
-    height: 100%;
-    float: none;
-    background-size: auto;
+  height: 100%;
+  float: none;
+  background-size: auto;
 }
 
-.wrapper{
-    margin-left: 600px; margin-top: 340px; 
+.wrapper {
+  margin-left: 600px;
+  margin-top: 340px;
 }
 
-.wrapper-selector{
-    margin-top: 350px;
-    margin-left: 800px;
+.wrapper-selector {
+  margin-top: 350px;
+  margin-left: 800px;
 }
 
-.wrapper-registration{
-    margin-left: 700px;
+.wrapper-registration {
+  margin-left: 700px;
+}
+
+.cont {
+  width: 85vw;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 0.2fr;
+  grid-gap: 20px;
+}
+
+.main-card {
+  height: 80vh;
+  margin-top: 5vh;
+}
+
+.cont2 {
+  display: flex;
 }
 
 @media only screen and (max-width: 600px) {
-    .wrapper {
-       margin:auto;
-       margin-top: 140px;
-       margin-left: 50px;
-    }
-
-    .img{
-        display: none;
-    }
-
-    .wrapper-selector{
-        margin:auto;
-       margin-top: 300px;
-       margin-left: 100px;
-    }
-
-    .wrapper-registration{
-        margin-left: -30px;
-        margin-right: 30px;
-    }
+  .wrapper {
+    margin: auto;
+    margin-top: 140px;
+    margin-left: 50px;
   }
 
+  .img {
+    display: none;
+  }
+
+  .wrapper-selector {
+    margin: auto;
+    margin-top: 300px;
+    margin-left: 100px;
+  }
+
+  .wrapper-registration {
+    margin-left: -30px;
+    margin-right: 30px;
+  }
+}
