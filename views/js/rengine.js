@@ -1,36 +1,49 @@
 const maker = document.getElementById('food-maker');
 const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
-var check = 'false';
+var check = false;
 
-maker.addEventListener('click', function() {
+maker.addEventListener('click', async function() {
    console.log('maker :)')
    main.innerHTML= formM;
    var registrationMaker = document.getElementById('registrationmaker');
-   check = 'true';
+   check = true;
    registrationMaker.addEventListener('click', (event) => {
        event.preventDefault()
-       user = validator()
+       user = validatorProfile()
        const error = document.getElementById('error')
        error.innerHTML = ''
        if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
         main.innerHTML = formMInfos
+        registrationMaker = document.getElementById('registrationmaker2')
+        registrationMaker.addEventListener('click', event => {
+            event.preventDefault()
+            validatorMaker(user)
+            console.log(user)
+
+        })
        }
        else error.innerHTML = user
     })
 });
 
-lover.addEventListener('click', function() { 
+lover.addEventListener('click', async function() { 
    console.log('lover :)')
    main.innerHTML= formL
    var registrationLover = document.getElementById('registrationlover');
-   registrationLover.addEventListener('click', (event) => { 
+   registrationLover.addEventListener('click', event => { 
        event.preventDefault()
-       user = validator()
+       user = validatorProfile()
        const error = document.getElementById('error')
        error.innerHTML = ''
        if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
         main.innerHTML = formLInfos
+        registrationLover = document.getElementById('registrationlover2')
+        registrationLover.addEventListener('click', event => {
+            event.preventDefault()
+            validatorLover(user)
+            console.log(user)
+        })
        }
        else error.innerHTML = user
     })
@@ -39,25 +52,78 @@ lover.addEventListener('click', function() {
 
 
 //#region functions
-function validator(){
-    console.log('aaaa')
+function validatorProfile(){
     let username = document.getElementById('username').value
     let fullname = document.getElementById('fullname').value
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
     let confirmed_password = document.getElementById('confirm_password').value
-    if(username.length > 3 && fullname.length > 3 && email.includes('@')){
+    if(username.length > 3 && fullname.length > 3 && email.includes('@'))
+    {
         if(password.length >= 8 && password == confirmed_password)
         {
+            if(!check){
             return user = {
             username : username,             
             fullname : fullname,
             email : email,
             password : password,
-            maker : check
+            maker : check,
+            payment: {  
+            },
+            address:{ 
+                }
             }
+        }
+
+            if(check){
+            return user = {
+            username : username,             
+            fullname : fullname,
+            email : email,
+            password : password,
+            maker : check,
+            restaurant: {  
+                },
+                }  
+            }
+
         }else{return 'check your password, it must be the same of confirm password and at least 8 char long'}
     }else{return 'insert valid username and email'}
+}
+
+async function validatorLover(user){
+    const error = document.getElementById('errorL2')
+            const address = document.getElementById('address').value
+            const cardNumber = document.getElementById('cardNumber').value
+            const cardCvv = document.getElementById('cardCvv').value
+            const cardName = document.getElementById('cardName').value
+
+            console.log(cardCvv.length)
+            console.log(cardNumber.length)
+
+            if(address && cardNumber && cardCvv && cardName){
+                if(Number(cardNumber.length) <= 16 && Number(cardNumber.length) >= 13 && Number(cardCvv.length) == 3){
+                    user.payment.cardNumber = cardNumber
+                    user.payment.cardCvv = cardCvv
+                    user.payment.cardName = cardName
+
+                }else{error.innerHTML = 'Please fill every single field correctly'}
+            }else {error.innerHTML = 'Please fill every single field'}
+}
+
+async function validatorMaker(){
+    const error = document.getElementById('errorM2')
+    const restaurantName = document.getElementById('restaurantName').value
+    const restaurantDescription = document.getElementById('restaurantDescription').value
+    const restaurantLocation = document.getElementById('restaurantLocation').value
+
+    if(restaurantName && Number(restaurantName.length) > 3 &&  restaurantDescription && Number(restaurantDescription.length) > 10 && Number(restaurantDescription.length) < 256 && restaurantLocation){
+        user.restaurant.restaurantName = restaurantName
+        user.restaurant.restaurantDescription = restaurantDescription
+        user.restaurant.restaurantLocation = restaurantLocation
+
+    }else {error.innerHTML = 'Please fill every single field properly'}
 }
 
 function openDB(type){
@@ -209,8 +275,8 @@ const formMInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapp
             placeholder="Restaurant location" />
 
 
-            <label class="text-red-500" for="registrationlover2" id="errorR2"></label>
-            <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover2">
+            <label class="text-red-500" for="registrationlover2" id="errorM2"></label>
+            <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationmaker2">
         </form>
         <div class="text-center text-sm text-grey-dark mt-4">
             By signing up, you agree to the 
@@ -282,4 +348,5 @@ const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapp
     </div>
 </div>
 </div>`
+
 //#endregion
