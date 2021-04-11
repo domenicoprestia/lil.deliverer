@@ -154,7 +154,6 @@ function validatorProfile() {
 
 async function validatorLover(user) {
     const error = document.getElementById('errorL2')
-    const address = document.getElementById('address').value
     const cardNumber = document.getElementById('cardNumber').value
     const cardCvv = document.getElementById('cardCvv').value
     const cardName = document.getElementById('cardName').value
@@ -164,7 +163,7 @@ async function validatorLover(user) {
     console.log(cardCvv.length)
     console.log(cardNumber.length)
 
-    if (address && cardNumber && cardCvv && cardName) {
+    if (position && cardNumber && cardCvv && cardName && civic) {
         if (Number(cardNumber.length) <= 16 && Number(cardNumber.length) >= 13 && Number(cardCvv.length) == 3) {
             user.payment.cardNumber = cardNumber
             user.payment.cardCvv = cardCvv
