@@ -43,9 +43,6 @@ lover.addEventListener('click', async function() {
         
     let autocomplete;
     let address;
-    let address1Field;
-    let address2Field;
-    let postalField;
 
     function initAutocomplete() {
     address = document.querySelector("#address");
@@ -55,21 +52,17 @@ lover.addEventListener('click', async function() {
         types: ["address"],
     });
     address.focus();
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
+    
     autocomplete.addListener("place_changed", fillInAddress);
     }
 
     function fillInAddress() {
-    // Get the place details from the autocomplete object.
+    
     const place = autocomplete.getPlace();
     let address1 = "";
     let postcode = "";
 
-    // Get each component of the address from the place details,
-    // and then fill-in the corresponding field on the form.
-    // place.address_components are google.maps.GeocoderAddressComponent objects
-    // which are documented at http://goo.gle/3l5i5Mr
+    
     for (const component of place.address_components) {
         const componentType = component.types[0];
 
@@ -106,12 +99,7 @@ lover.addEventListener('click', async function() {
             break;
         }
     }
-    //address1Field.value = address1;
-    //postalField.value = postcode;
-    // After filling the form with address components from the Autocomplete
-    // prediction, set cursor focus on the second address line to encourage
-    // entry of subpremise information such as apartment, unit, or floor number.
-    //address2Field.focus();
+    
     }
         initAutocomplete();
         //#endregion
@@ -170,7 +158,8 @@ async function validatorLover(user) {
     const cardNumber = document.getElementById('cardNumber').value
     const cardCvv = document.getElementById('cardCvv').value
     const cardName = document.getElementById('cardName').value
-
+    const position = document.getElementById('address').value
+    const civic = document.getElementById('civic').value
 
     console.log(cardCvv.length)
     console.log(cardNumber.length)
@@ -180,6 +169,8 @@ async function validatorLover(user) {
             user.payment.cardNumber = cardNumber
             user.payment.cardCvv = cardCvv
             user.payment.cardName = cardName
+            user.address.position = position 
+            user.address.civic = civic
 
         } else { error.innerHTML = 'Please fill every single field correctly' }
     } else { error.innerHTML = 'Please fill every single field' }
@@ -380,6 +371,12 @@ const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapp
             class="block border border-grey-light w-full p-3 rounded mb-4"
             id="address"
             placeholder="Address" />
+
+            <input 
+            type="text"
+            class="block border border-grey-light w-full p-3 rounded mb-4"
+            id="civic"
+            placeholder="civic number" />
 
         <input 
             type="text"
