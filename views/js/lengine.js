@@ -1,42 +1,71 @@
 const maker = document.getElementById('food-maker');
 const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
-var check = 'false';
+var checkMaker = false;
 
 maker.addEventListener('click', function() {
    console.log('maker :)')
-   main.innerHTML= formL
+
+   main.innerHTML= form
    var loginMaker = document.getElementById('login');
-   check = 'true';
+   checkMaker = true;
    loginMaker.addEventListener('click', (event) => {
        event.preventDefault()
-       const error = document.getElementById('error')
-       error.innerHTML = ''
-      /* if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
-        main.innerHTML = formMInfos
-       }
-       else error.innerHTML = user*/
+       let checkLog = loginHandler()
+
+       if(checkLog){
+            window.location.replace("../main/sas.html")
+        }
+        else{
+            document.getElementById("error").innerHTML = "Incorrect username or password"
+        }
+
     })
 });
 
 lover.addEventListener('click', function() { 
    console.log('lover :)')
-   main.innerHTML= formL
+   
+   main.innerHTML= form
    var loginLover = document.getElementById('login');
    loginLover.addEventListener('click', (event) => { 
        event.preventDefault()
-       const error = document.getElementById('error')
-       error.innerHTML = ''
-      /* if(user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email'){
-        main.innerHTML = formLInfos
+       let checkLog = loginHandler()
+
+      if(checkLog){
+           window.location.replace("../main/main.html")
        }
-       else error.innerHTML = user*/
+       else{
+           document.getElementById("error").innerHTML = "Incorrect username or password"
+       } 
+
     })
    
 });
 
+//#region function
+
+function loginHandler(){
+    let username = document.getElementById('username').value
+    let password = document.getElementById('password').value
+    let checkLog = false
+
+    
+    let userArr = JSON.parse(localStorage.getItem("users"))
+
+    if(userArr){
+        userArr.forEach(user => {
+            if(user.username == String(username) && user.password == String(password) && user.maker == checkMaker) 
+            checkLog = true
+        })
+        return checkLog
+    }
+}
+
+//#endregion
+
 //#region items
-const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
+const form = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign in!</h1>

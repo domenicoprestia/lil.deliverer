@@ -152,6 +152,7 @@ function validatorProfile() {
     let usersArr = JSON.parse(localStorage.getItem('users'))
     let same = false
     
+    if(usersArr)
     usersArr.map(utente => {if(utente.username == String(username)) {same = true} })
 
     if(!same){
