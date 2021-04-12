@@ -112,10 +112,10 @@ lover.addEventListener('click', async function() {
             addressMaps();
 
             registrationLover = document.getElementById('registrationlover2')
-            registrationLover.addEventListener('click', event => {
+            registrationLover.addEventListener('click', async event => {
                 event.preventDefault()
-                validatorLover(user)
-                console.log(user)
+                await validatorLover(user)
+                await storeUser(user)
             })
         } else error.innerHTML = user
     })
@@ -124,12 +124,28 @@ lover.addEventListener('click', async function() {
 
 
 //#region functions
+async function storeUser(user){
+    let usersArr 
+    if(localStorage.getItem('users') === null){
+        usersArr = [];
+    }else{
+        usersArr = JSON.parse(localStorage.getItem('users'))     //converte da json a js object
+    }
+
+    console.log(usersArr)
+    usersArr.push(user)
+    console.log(usersArr)
+    localStorage.setItem('users', JSON.stringify(usersArr))     //converte da js object a json 
+}
+
 function validatorProfile() {
     let username = document.getElementById('username').value
     let fullname = document.getElementById('fullname').value
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
     let confirmed_password = document.getElementById('confirm_password').value
+    let usersArr = JSON.parse(localStorage.getItem('users'))
+
     if (username.length > 3 && fullname.length > 3 && email.includes('@')) {
         if (password.length >= 8 && password == confirmed_password) {
             if (!check) {
@@ -156,7 +172,7 @@ function validatorProfile() {
             }
 
         } else { return 'check your password, it must be the same of confirm password and at least 8 char long' }
-    } else { return 'insert valid username and email' }
+    } else { return 'pene' }
 }
 
 async function validatorLover(user) {
@@ -166,9 +182,6 @@ async function validatorLover(user) {
     const cardName = document.getElementById('cardName').value
     const position = document.getElementById('address').value
     const civic = document.getElementById('civic').value
-
-    console.log(cardCvv.length)
-    console.log(cardNumber.length)
 
     if (position && cardNumber && cardCvv && cardName && civic) {
         if (Number(cardNumber.length) <= 16 && Number(cardNumber.length) >= 13 && Number(cardCvv.length) == 3) {
@@ -196,16 +209,6 @@ async function validatorMaker() {
     } else { error.innerHTML = 'Please fill every single field properly' }
 }
 
-function openDB(type) {
-    console.log('trying...')
-    var db
-    var DBOpenRequest = window.indexedDB.open('lil.deliverer', 4)
-    DBOpenRequest.onerror = () => {}
-
-    DBOpenRequest.onsuccess = () => {
-        db = DBOpenRequest.result
-    }
-}
 //#endregion
 //#region items 
 const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
