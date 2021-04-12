@@ -3,41 +3,7 @@ const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
 var check = false;
 
-maker.addEventListener('click', async function() {
-    console.log('maker :)')
-    main.innerHTML = formM;
-    var registrationMaker = document.getElementById('registrationmaker');
-    check = true;
-    registrationMaker.addEventListener('click', (event) => {
-        event.preventDefault()
-        user = validatorProfile()
-        const error = document.getElementById('error')
-        error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
-            main.innerHTML = formMInfos
-            registrationMaker = document.getElementById('registrationmaker2')
-            registrationMaker.addEventListener('click', event => {
-                event.preventDefault()
-                validatorMaker(user)
-                console.log(user)
-
-            })
-        } else error.innerHTML = user
-    })
-});
-
-lover.addEventListener('click', async function() {
-    console.log('lover :)')
-    main.innerHTML = formL
-    var registrationLover = document.getElementById('registrationlover');
-    registrationLover.addEventListener('click', event => {
-        event.preventDefault()
-        user = validatorProfile()
-        const error = document.getElementById('error')
-        error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
-            main.innerHTML = formLInfos
-
+function addressMaps(){
     //#region mapsApi
 
         
@@ -103,6 +69,47 @@ lover.addEventListener('click', async function() {
     }
         initAutocomplete();
         //#endregion
+}
+
+maker.addEventListener('click', async function() {
+    console.log('maker :)')
+    main.innerHTML = formM;
+    var registrationMaker = document.getElementById('registrationmaker');
+    check = true;
+    registrationMaker.addEventListener('click', (event) => {
+        event.preventDefault()
+        user = validatorProfile()
+        const error = document.getElementById('error')
+        error.innerHTML = ''
+        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
+            main.innerHTML = formMInfos
+
+            addressMaps();
+
+            registrationMaker = document.getElementById('registrationmaker2')
+            registrationMaker.addEventListener('click', event => {
+                event.preventDefault()
+                validatorMaker(user)
+                console.log(user)
+
+            })
+        } else error.innerHTML = user
+    })
+});
+
+lover.addEventListener('click', async function() {
+    console.log('lover :)')
+    main.innerHTML = formL
+    var registrationLover = document.getElementById('registrationlover');
+    registrationLover.addEventListener('click', event => {
+        event.preventDefault()
+        user = validatorProfile()
+        const error = document.getElementById('error')
+        error.innerHTML = ''
+        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
+            main.innerHTML = formLInfos
+
+            addressMaps();
 
             registrationLover = document.getElementById('registrationlover2')
             registrationLover.addEventListener('click', event => {
@@ -179,13 +186,13 @@ async function validatorMaker() {
     const error = document.getElementById('errorM2')
     const restaurantName = document.getElementById('restaurantName').value
     const restaurantDescription = document.getElementById('restaurantDescription').value
-    const restaurantLocation = document.getElementById('restaurantLocation').value
+    const restaurantLocation = document.getElementById('address').value
 
     if (restaurantName && Number(restaurantName.length) > 3 && restaurantDescription && Number(restaurantDescription.length) > 10 && Number(restaurantDescription.length) < 256 && restaurantLocation) {
         user.restaurant.restaurantName = restaurantName
         user.restaurant.restaurantDescription = restaurantDescription
         user.restaurant.restaurantLocation = restaurantLocation
-
+        
     } else { error.innerHTML = 'Please fill every single field properly' }
 }
 
@@ -333,7 +340,7 @@ const formMInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapp
         <input 
             type="text"
             class="block border border-grey-light w-full p-3 rounded mb-4"
-            id="restaurantLocation"
+            id="address"
             placeholder="Restaurant location" />
 
 
