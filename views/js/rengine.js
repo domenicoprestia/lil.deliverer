@@ -71,7 +71,7 @@ function addressMaps(){
         //#endregion
 }
 
-maker.addEventListener('click', async function() {
+maker.addEventListener('click', function() {
     console.log('maker :)')
     main.innerHTML = formM;
     var registrationMaker = document.getElementById('registrationmaker');
@@ -81,23 +81,27 @@ maker.addEventListener('click', async function() {
         user = validatorProfile()
         const error = document.getElementById('error')
         error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
+        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email' && user != 'This username already exists') {
             main.innerHTML = formMInfos
 
             addressMaps();
 
             registrationMaker = document.getElementById('registrationmaker2')
-            registrationMaker.addEventListener('click', event => {
+            registrationMaker.addEventListener('click', async event => {
                 event.preventDefault()
                 validatorMaker(user)
-                console.log(user)
+                await validatorMaker(user)
+                if(user.restaurant.restaurantLocation){
+                await storeUser(user)
+                window.location.replace('../main/main.html')
+            }
 
             })
         } else error.innerHTML = user
     })
 });
 
-lover.addEventListener('click', async function() {
+lover.addEventListener('click', function() {
     console.log('lover :)')
     main.innerHTML = formL
     var registrationLover = document.getElementById('registrationlover');
@@ -106,7 +110,7 @@ lover.addEventListener('click', async function() {
         user = validatorProfile()
         const error = document.getElementById('error')
         error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email') {
+        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email' && user != 'This username already exists') {
             main.innerHTML = formLInfos
 
             addressMaps();
@@ -115,7 +119,10 @@ lover.addEventListener('click', async function() {
             registrationLover.addEventListener('click', async event => {
                 event.preventDefault()
                 await validatorLover(user)
+                if(user.address.position){
                 await storeUser(user)
+                window.location.replace('../main/main.html')
+            }
             })
         } else error.innerHTML = user
     })
@@ -124,7 +131,7 @@ lover.addEventListener('click', async function() {
 
 
 //#region functions
-async function storeUser(user){
+function storeUser(user){
     let usersArr 
     if(localStorage.getItem('users') === null){
         usersArr = [];
@@ -132,9 +139,7 @@ async function storeUser(user){
         usersArr = JSON.parse(localStorage.getItem('users'))     //converte da json a js object
     }
 
-    console.log(usersArr)
     usersArr.push(user)
-    console.log(usersArr)
     localStorage.setItem('users', JSON.stringify(usersArr))     //converte da js object a json 
 }
 
@@ -145,7 +150,11 @@ function validatorProfile() {
     let password = document.getElementById('password').value
     let confirmed_password = document.getElementById('confirm_password').value
     let usersArr = JSON.parse(localStorage.getItem('users'))
+    let same = false
+    
+    usersArr.map(utente => {if(utente.username == String(username)) {same = true} })
 
+    if(!same){
     if (username.length > 3 && fullname.length > 3 && email.includes('@')) {
         if (password.length >= 8 && password == confirmed_password) {
             if (!check) {
@@ -172,7 +181,8 @@ function validatorProfile() {
             }
 
         } else { return 'check your password, it must be the same of confirm password and at least 8 char long' }
-    } else { return 'pene' }
+    } else { return 'insert valid username and email' }
+}else {return 'This username already exists'}
 }
 
 async function validatorLover(user) {
@@ -182,6 +192,7 @@ async function validatorLover(user) {
     const cardName = document.getElementById('cardName').value
     const position = document.getElementById('address').value
     const civic = document.getElementById('civic').value
+    
 
     if (position && cardNumber && cardCvv && cardName && civic) {
         if (Number(cardNumber.length) <= 16 && Number(cardNumber.length) >= 13 && Number(cardCvv.length) == 3) {
