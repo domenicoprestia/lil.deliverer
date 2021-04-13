@@ -1,22 +1,26 @@
 document.addEventListener('DOMContentLoaded', async event => {
   
-   const currentUsers = JSON.parse(localStorage.getItem('users'))
+   let registeredUsers = []
+   
+  if(localStorage.getItem("users") !== null){
+       registeredUsers = (JSON.parse(localStorage.getItem('users')))
+   }
+   console.log(registeredUsers);
+
    
    const usersArr= []
 
-   console.log(currentUsers)
-
-    await fetch('../data/users.json').then(response => response.json()).then(data => {
+    await fetch('../../views/data/users.json').then(response => response.json()).then(data => {
         data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
 
-    await fetch('../data/makers.json').then(response => response.json()).then(data => {
+    await fetch('../../views/data/makers.json').then(response => response.json()).then(data => {
         data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})})
 
-    currentUsers.forEach(user => {usersArr.forEach((userF, index) => {if(user.username == userF.username) usersArr.splice(index, 1)})})
+        
+        registeredUsers.forEach(user => {usersArr.forEach((userF, index) => {if(user.username == userF.username) usersArr.splice(index, 1)})})
 
-    console.log(currentUsers)
-
-    if(usersArr.length > 0) usersArr.forEach(user => {currentUsers.push(user)})
-
-    localStorage.setItem('users', JSON.stringify(currentUsers))
+        if(usersArr.length > 0) usersArr.forEach(user => {registeredUsers.push(user)})
+       
+        localStorage.setItem('users', JSON.stringify(registeredUsers))
+        
 })
