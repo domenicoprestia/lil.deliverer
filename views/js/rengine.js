@@ -3,7 +3,7 @@ const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
 var check = false;
 
-readJson()
+
 
 function addressMaps(){
     //#region mapsApi
@@ -95,6 +95,7 @@ maker.addEventListener('click', function() {
                 await validatorMaker(user)
                 if(user.restaurant.restaurantLocation){
                 await storeUser(user)
+                storeLog(user)
                 window.location.replace('../main/main.html')
             }
 
@@ -123,6 +124,7 @@ lover.addEventListener('click', function() {
                 await validatorLover(user)
                 if(user.address.position){
                 await storeUser(user)
+                await storeLog(user)
                 window.location.replace('../main/main.html')
             }
             })
@@ -134,25 +136,8 @@ lover.addEventListener('click', function() {
 
 //#region functions
 
-async function readJson(){
-    const usersArr = []
-
-    await fetch('../data/users.json').then(response => response.json()).then(data => {
-        data.users.forEach(user => {user.maker = false; usersArr.push(user)})
-    })
-
-    await fetch('../data/makers.json').then(response => response.json()).then(data => {
-        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})
-    })
-    localStorage.setItem('users', JSON.stringify(usersArr))
-}
-
-async function storeLover(){
-
-}
-
-async function storeMaker(){
-
+async function storeLog(user){
+    sessionStorage.setItem('logged', JSON.stringify(user))
 }
 
 function storeUser(user){
@@ -162,6 +147,9 @@ function storeUser(user){
     }else{
         usersArr = JSON.parse(localStorage.getItem('users'))     //converte da json a js object
     }
+
+    console.log(user)
+    console.log(usersArr)
 
     usersArr.push(user)
     localStorage.setItem('users', JSON.stringify(usersArr))     //converte da js object a json 

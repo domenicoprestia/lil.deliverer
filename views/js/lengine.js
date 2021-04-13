@@ -4,7 +4,7 @@ const main = document.getElementById('main');
 var checkMaker = false;
 let userLog
 
-readJson()
+
 
 maker.addEventListener('click', function() {
    console.log('maker :)')
@@ -15,7 +15,7 @@ maker.addEventListener('click', function() {
    loginMaker.addEventListener('click', (event) => {
        event.preventDefault()
        let checkLog = loginHandler()
-
+       console.log(checkLog)
        if(checkLog){
             storeLog(userLog)
             window.location.replace("../main/main.html")
@@ -52,21 +52,26 @@ lover.addEventListener('click', function() {
 
 async function storeLog(user){
     sessionStorage.setItem('logged', JSON.stringify(user))
-    console.log(user)
 }
 
-async function readJson(){
-    const usersArr = []
+/*async function readJson(){
+     const currentUsers = JSON.parse(localStorage.getItem('users'))
+     const usersArr= []
+
 
     await fetch('../data/users.json').then(response => response.json()).then(data => {
-        data.users.forEach(user => {user.maker = false; usersArr.push(user)})
-    })
+        data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
 
     await fetch('../data/makers.json').then(response => response.json()).then(data => {
-        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})
-    })
-    localStorage.setItem('users', JSON.stringify(usersArr))
-}
+        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})})
+
+    currentUsers.forEach(user => {usersArr.forEach((userF, index) => {if(user.username == userF.username) usersArr.splice(index, 1)})})
+
+    
+    if(usersArr.length > 0) usersArr.forEach(user => {currentUsers.push(user)})
+
+    localStorage.setItem('users', JSON.stringify(currentUsers))
+}*/
 
 function loginHandler(){
     let username = document.getElementById('username').value
@@ -78,9 +83,10 @@ function loginHandler(){
 
     if(userArr){
         userArr.forEach(user => {
-            if(user.username == String(username) && user.password == String(password) && user.maker == checkMaker) 
+            if(user.username == String(username) && user.password == String(password) && user.maker == checkMaker){
             userLog = user
             checkLog = true
+            }
         })
         return checkLog
     }
