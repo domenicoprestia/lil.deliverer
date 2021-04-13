@@ -2,6 +2,7 @@
   "users": [
     {
       "username": "user1",
+      "fullname": "Andrea Rossi",
       "email": "email@email.it",
       "password": "pass1",
       "genere": "M",
@@ -21,6 +22,7 @@
     },
     {
       "username": "user2",
+      "fullname": "Raffaele Andreoli",
       "password": "pass2",
       "genere": "F",
       "email": "email@email.it",
