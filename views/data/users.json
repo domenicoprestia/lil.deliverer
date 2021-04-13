@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "username": "user1",
+      "email": "email@email.it",
+      "password": "pass1",
+      "genere": "M",
+      "payment": {},
+      "address":{ 
+        "position": "Via Caduti di Nassyria, 5 - Bergamo",
+        "civic": "5",
+        "coordinate": {
+          "longitudine": 56.87,
+          "latitudine": 65.98
+        },
+      "privacy": {
+        "offerte_personalizzate": true,
+        "consenso_privacy": true
+      }
+    }
+    },
+    {
+      "username": "user2",
+      "password": "pass2",
+      "genere": "F",
+      "email": "email@email.it",
+      "payment": {},
+      "address":{ 
+      "position": "Via Caduti di Nassyria, 5 - Bergamo",
+      "civic": "5",
+      "coordinate": {
+        "longitudine": 56.87,
+        "latitudine": 65.98
+      }
+    },
+      "privacy": {
+        "offerte_personalizzate": true,
+        "consenso_privacy": true
+      }
+    }
+  ]
+}

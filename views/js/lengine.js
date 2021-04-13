@@ -2,6 +2,9 @@ const maker = document.getElementById('food-maker');
 const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
 var checkMaker = false;
+let userLog
+
+readJson()
 
 maker.addEventListener('click', function() {
    console.log('maker :)')
@@ -14,7 +17,8 @@ maker.addEventListener('click', function() {
        let checkLog = loginHandler()
 
        if(checkLog){
-            window.location.replace("../main/sas.html")
+            storeLog(userLog)
+            window.location.replace("../main/main.html")
         }
         else{
             document.getElementById("error").innerHTML = "Incorrect username or password"
@@ -33,6 +37,7 @@ lover.addEventListener('click', function() {
        let checkLog = loginHandler()
 
       if(checkLog){
+           storeLog(userLog)
            window.location.replace("../main/main.html")
        }
        else{
@@ -43,7 +48,25 @@ lover.addEventListener('click', function() {
    
 });
 
-//#region function
+//#region functions
+
+async function storeLog(user){
+    sessionStorage.setItem('logged', JSON.stringify(user))
+    console.log(user)
+}
+
+async function readJson(){
+    const usersArr = []
+
+    await fetch('../data/users.json').then(response => response.json()).then(data => {
+        data.users.forEach(user => {user.maker = false; usersArr.push(user)})
+    })
+
+    await fetch('../data/makers.json').then(response => response.json()).then(data => {
+        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})
+    })
+    localStorage.setItem('users', JSON.stringify(usersArr))
+}
 
 function loginHandler(){
     let username = document.getElementById('username').value
@@ -56,6 +79,7 @@ function loginHandler(){
     if(userArr){
         userArr.forEach(user => {
             if(user.username == String(username) && user.password == String(password) && user.maker == checkMaker) 
+            userLog = user
             checkLog = true
         })
         return checkLog
@@ -63,6 +87,7 @@ function loginHandler(){
 }
 
 //#endregion
+
 
 //#region items
 const form = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">

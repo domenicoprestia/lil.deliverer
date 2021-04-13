@@ -3,6 +3,8 @@ const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
 var check = false;
 
+readJson()
+
 function addressMaps(){
     //#region mapsApi
 
@@ -131,6 +133,28 @@ lover.addEventListener('click', function() {
 
 
 //#region functions
+
+async function readJson(){
+    const usersArr = []
+
+    await fetch('../data/users.json').then(response => response.json()).then(data => {
+        data.users.forEach(user => {user.maker = false; usersArr.push(user)})
+    })
+
+    await fetch('../data/makers.json').then(response => response.json()).then(data => {
+        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})
+    })
+    localStorage.setItem('users', JSON.stringify(usersArr))
+}
+
+async function storeLover(){
+
+}
+
+async function storeMaker(){
+
+}
+
 function storeUser(user){
     let usersArr 
     if(localStorage.getItem('users') === null){
@@ -166,7 +190,11 @@ function validatorProfile() {
                     password: password,
                     maker: check,
                     payment: {},
-                    address: {}
+                    address: {coordinate: {}},
+                    privacy: {
+                        offerte_personalizzate: true,
+                        consenso_privacy: true
+                      }
                 }
             }
 
@@ -177,7 +205,7 @@ function validatorProfile() {
                     email: email,
                     password: password,
                     maker: check,
-                    restaurant: {},
+                    restaurant: {piatti_ordinabili: [{}]},
                 }
             }
 

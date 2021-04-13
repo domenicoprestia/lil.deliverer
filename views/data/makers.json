@@ -1,0 +1,91 @@
+{
+  "makers": [
+    {
+      "username": "jhonny",
+      "fullname": "jhonny bravo",
+      "email": "email@email.it",
+      "password": "pass1",
+      "restaurant": {
+      "nome": "Dal pescatore",
+      "address": "Via Roma 56, Milano",   
+      "piatti_ordinabili": [{
+        "nome_piatto": "Spaghetti alle vongole",
+        "prezzo": 5.76,
+        "tempo_preparazione": 15,
+        "sconto_percentuale": 2,
+        "vegetariano": true,
+        "biologico": true
+      },
+        {
+          "nome_piatto": "Stinco di maiale",
+          "prezzo": 7.65,
+          "tempo_preparazione": 5,
+          "sconto_percentuale": -1,
+          "vegetariano": false,
+          "biologico": false
+        },
+        {
+          "nome_piatto": "Macedonia",
+          "prezzo": 2.64,
+          "tempo_preparazione": 5,
+          "sconto_percentuale": -1,
+          "vegetariano": true,
+          "biologico": false
+        }]
+      }
+    },
+    {
+      "username": "sonny",
+      "fullname": "sonny bravo",
+      "email": "email1@email.it",
+      "password": "pass2",
+      "restaurant": {
+      "nome": "Dal mangiatore",
+      "address": "Via Roma 56, Milano",   
+      "piatti_ordinabili": [{
+        "nome_piatto": "Luccio in umido",
+        "prezzo": 5.76,
+        "tempo_preparazione": 15,
+        "sconto_percentuale": 2,
+        "vegetariano": true,
+        "biologico": true
+      },
+        {
+          "nome_piatto": "Bigoli con le sarde",
+          "prezzo": 7.65,
+          "tempo_preparazione": 5,
+          "sconto_percentuale": -1,
+          "vegetariano": false,
+          "biologico": false
+        }]
+      }
+    },
+    {
+      "username": "monny",
+      "fullname": "monny bravo",
+      "email": "email2@email.it",
+      "password": "pass3",
+      "restaurant": {
+      "nome": "Dall'agricoltore",
+      "address": "Via Roma 56, Milano",   
+      "piatti_ordinabili": [{
+        "nome_piatto": "Polenta pasticciata",
+        "prezzo": 5.76,
+        "tempo_preparazione": 15,
+        "sconto_percentuale": 2,
+        "vegetariano": false,
+        "biologico": true
+      },
+        {
+          "nome_piatto": "Tiramisu",
+          "prezzo": 7.65,
+          "tempo_preparazione": 5,
+          "sconto_percentuale": -1,
+          "vegetariano": true,
+          "biologico": false
+        }]
+      }
+    }
+    
+  ]
+}
