@@ -1,6 +1,5 @@
 let loggedUser = JSON.parse(sessionStorage.getItem("logged"))
 
-
 document.getElementById("name").innerHTML = String(loggedUser.fullname)
 document.getElementById("email").innerHTML = String(loggedUser.email)
 document.getElementById("username").innerHTML = String(loggedUser.username)
@@ -18,6 +17,16 @@ else{
 
 document.getElementById("cardnumber").innerHTML = cardNumber
 
-let town = String(loggedUser) //continuare da qui 
+let position = String(loggedUser.address.position)
+let positionSplitted = position.split(',')
 
-document.getElementById("town") = town
+document.getElementById("town").innerHTML = positionSplitted[1] + ", " + positionSplitted[2] + ", " + positionSplitted[3]
+
+positionSplitted.splice(1, 3)
+
+let arrayUnito = positionSplitted.join(',')
+
+console.log(arrayUnito)
+
+document.getElementById("address").innerHTML = arrayUnito + ", " + loggedUser.address.civic
+

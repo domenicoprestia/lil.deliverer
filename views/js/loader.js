@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async event => {
    console.log(registeredUsers);
 
    
-   const usersArr= []
+   const usersArr = []
 
     await fetch('../data/users.json').then(response => response.json()).then(data => {
         data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
