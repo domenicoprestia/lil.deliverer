@@ -8,6 +8,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 #particles-js {
@@ -31,16 +32,39 @@ body {
 }
 
 .cont {
-  width: 85vw;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.2fr 1fr 0.2fr;
-  grid-gap: 20px;
+  width: 190vh;
+  position: absolute;
+  margin-left: 2%;
+  align-items: center;
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  overflow-x: scroll;
+  text-align: center;
+}
+
+.rest {
+  transition: transform 500ms;
+}
+
+.rest:hover {
+  transform: scale(1.09);
+  cursor: pointer;
+}
+
+#container::-webkit-scrollbar {
+  display: none;
 }
 
 .main-card {
   height: 80vh;
   margin-top: 5vh;
+}
+
+#username {
+  display: none;
 }
 
 .cont2 {
@@ -52,6 +76,20 @@ body {
     margin: auto;
     margin-top: 140px;
     margin-left: 50px;
+  }
+
+  .cont {
+    width: 50vh;
+    position: absolute;
+    margin-left: 2%;
+    align-items: center;
+    text-align: center;
+  }
+
+  #container {
+    display: flex;
+    overflow-x: scroll;
+    text-align: center;
   }
 
   .img {
