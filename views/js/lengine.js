@@ -105,7 +105,7 @@ const form = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-reg
             type="text"
             class="block border border-grey-light w-full p-3 rounded mb-4"
             id="username"
-            placeholder="username" />
+            placeholder="username"/>
         <input 
             type="password"
             class="block border border-grey-light w-full p-3 rounded mb-4"

@@ -32,7 +32,7 @@ body {
 }
 
 .cont {
-  width: 190vh;
+  width: 100%;
   position: absolute;
   margin-left: 2%;
   align-items: center;
@@ -84,8 +84,22 @@ body {
     margin-left: 50px;
   }
 
+  #container::-webkit-scrollbar {
+    display: initial;
+    width: 12px;
+  }
+
+  #container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  #container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.1);
+  }
+
   .cont {
-    width: 50vh;
     position: absolute;
     margin-left: 2%;
     align-items: center;

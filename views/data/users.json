@@ -6,7 +6,9 @@
       "email": "email@email.it",
       "password": "pass1",
       "genere": "M",
-      "payment": {},
+      "payment": {
+        "cardNumber": "1234567891234"
+      },
       "address":{ 
         "position": "Via Caduti di Nassyria, 5 - Bergamo",
         "civic": "5",
