@@ -1,6 +1,3 @@
-<!--Da modificare per modifica-->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,14 +11,12 @@
     <link rel="icon" href="../imgs/dwarf.ico" type="image/icon type">
     <title>lil.deliverer</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="main.html">LIL.DELIVERER</a>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -40,20 +35,48 @@
             </a>
         </div>
     </nav>
-    <div class="cont">
-        <div class="col">
-            <h1 class="text-5xl mt-4 text-purple-600 text-center">Choose a restaurant!</h1>
-
-            <div class="flex py-10 bg-transparent" id="container">
-
-            </div>
-
-            <div class="flex py-10 bg-transparent" id="plates">
-
-            </div>
-        </div>
+    <div id="main">
+        <div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;" id="modifyPartOne">
+            <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                    <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>
+                    <form>
+                    <input 
+                        type="text"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="username"
+                        placeholder="New username"/>
+                    
+                    <input 
+                        type="text"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="fullname"
+                        placeholder="New Full Name"/>
+            
+                    <input 
+                        type="text"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="email"
+                        placeholder="New Email"/>
+            
+                    <input 
+                        type="password"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="password"
+                        placeholder="New Password"/>
+                    <input 
+                        type="password"
+                        class="block border border-grey-light w-full p-3 rounded mb-4"
+                        id="confirm_password"
+                        placeholder="Confirm new Password"/>
+                        <label class="text-red-500" for="registrationlover" id="error"></label>
+                        <input type="submit" value="Modify" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px; align-items: center;" id="modifylover">
+                    </form>
+                </div>
     </div>
     <script src="../js/authChecker.js"></script>
+    <script src="../js/modifyUser.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg&libraries=places"></script>
 </body>
 
 </html>

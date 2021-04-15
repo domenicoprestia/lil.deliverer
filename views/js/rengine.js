@@ -3,12 +3,9 @@ const lover = document.getElementById('food-lover');
 const main = document.getElementById('main');
 var check = false;
 
-
-
 function addressMaps(){
     //#region mapsApi
 
-        
     let autocomplete;
     let address;
 
