@@ -1,4 +1,6 @@
 let orders = document.getElementById('order')
+let totalPrice = document.getElementById('totalPrice')
+let totalTime = document.getElementById('totalTime')
 
 document.addEventListener('DOMContentLoaded', event => {
    checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
@@ -18,6 +20,13 @@ function displayOrders(){
          <p class="w-1/10 mr-5 text-2xl">${ordine.price}</p>
       </div>
       <hr class="mx-10">`
+
+     
+
+      totalPrice.innerHTML = Number(totalPrice.innerText) + Number(ordine.price.replace('€', '').trim())
+      totalTime.innerHTML = Number(totalTime.innerText) + Number(ordine.minutes.replace(' mins', ''))
    });
+   totalPrice.innerHTML += '€'
+   totalTime.innerHTML += ' mins'
 }
 //#endregion
