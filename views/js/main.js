@@ -142,7 +142,7 @@ function displayRestaurants(){
    makers.map(maker => {
       if(maker.restaurant.description == undefined) maker.restaurant.description = ""
    card = `<div>
-            <div class="card rest p-3" style="width: 18rem; margin-right: 20px; margin-left: 20px">
+            <div class="card rest p-3 shadow" style="width: 18rem; margin-right: 20px; margin-left: 20px">
                <div class="card-body">
                   <h5 class="card-title text-2xl" id='name'}>${maker.restaurant.nome}</h5>
                      <h6 class="card-subtitle mb-2 text-muted">${maker.restaurant.address}</h6>

@@ -54,25 +54,6 @@ async function storeLog(user){
     sessionStorage.setItem('logged', JSON.stringify(user))
 }
 
-/*async function readJson(){
-     const currentUsers = JSON.parse(localStorage.getItem('users'))
-     const usersArr= []
-
-
-    await fetch('../data/users.json').then(response => response.json()).then(data => {
-        data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
-
-    await fetch('../data/makers.json').then(response => response.json()).then(data => {
-        data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})})
-
-    currentUsers.forEach(user => {usersArr.forEach((userF, index) => {if(user.username == userF.username) usersArr.splice(index, 1)})})
-
-    
-    if(usersArr.length > 0) usersArr.forEach(user => {currentUsers.push(user)})
-
-    localStorage.setItem('users', JSON.stringify(currentUsers))
-}*/
-
 function loginHandler(){
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value

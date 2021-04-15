@@ -22,10 +22,6 @@ body {
   margin-top: 340px;
 }
 
-.wrapper-selector {
-  margin-top: 350px;
-  margin-left: 800px;
-}
 
 .wrapper-registration {
   margin-left: 700px;
@@ -77,6 +73,14 @@ body {
   display: flex;
 }
 
+@media only screen and (max-width: 1200px){
+    .img{
+      display: none;}
+
+
+    }
+
+
 @media only screen and (max-width: 600px) {
   .wrapper {
     margin: auto;
@@ -117,9 +121,8 @@ body {
   }
 
   .wrapper-selector {
-    margin: auto;
-    margin-top: 300px;
-    margin-left: 100px;
+    margin-top: 35vh;
+    margin-left: 15vh;
   }
 
   .wrapper-registration {
