@@ -2,6 +2,7 @@ let loggedUser = JSON.parse(sessionStorage.getItem("logged"))
 
 var exists = document.getElementById("modifyPartOne") 
 
+var oldUsername = loggedUser.username
 
 
 if(exists){
@@ -83,20 +84,23 @@ async function storeLog(user){
     sessionStorage.setItem('logged', JSON.stringify(user))
 }
 
-function storeUser(user){
+async function storeUser(user){
     let usersArr 
     if(localStorage.getItem('users') === null){
-        usersArr = [];
+            usersArr = [];
     }else{
         usersArr = JSON.parse(localStorage.getItem('users'))     //converte da json a js object
     }
-
-    console.log(user)
-    console.log(usersArr)
-
-   // usersArr.ForEach(user => {if(user.)}) 
-    usersArr.push(user)
     
+   usersArr.forEach((user, index) => 
+   {
+        console.log(user.username)
+        if(user.username == oldUsername){
+            usersArr.splice(index, 1)
+        } 
+    })
+   
+    usersArr.push(user)
     localStorage.setItem('users', JSON.stringify(usersArr))     //converte da js object a json 
 }
 
