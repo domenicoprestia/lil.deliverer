@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', async event => {
    
    const usersArr = []
 
-    await fetch('../data/users.json').then(response => response.json()).then(data => {
+    await fetch('data/users.json').then(response => response.json()).then(data => {
         data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
 
-    await fetch('../data/makers.json').then(response => response.json()).then(data => {
+    await fetch('data/makers.json').then(response => response.json()).then(data => {
         data.makers.forEach(maker => {maker.maker = true; usersArr.push(maker)})})
 
         
