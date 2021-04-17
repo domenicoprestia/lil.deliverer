@@ -89,8 +89,7 @@ maker.addEventListener('click', function() {
             registrationMaker.addEventListener('click', async event => {
                 event.preventDefault()
                 validatorMaker(user)
-                await validatorMaker(user)
-                if(user.restaurant.restaurantLocation){
+                if(user.restaurant.address){
                 await storeUser(user)
                 storeLog(user)
                 window.location.replace('../main/main.html')
@@ -227,16 +226,16 @@ async function validatorMaker() {
     const restaurantLocation = document.getElementById('address').value
 
     if (restaurantName && Number(restaurantName.length) > 3 && restaurantDescription && Number(restaurantDescription.length) > 10 && Number(restaurantDescription.length) < 256 && restaurantLocation) {
-        user.restaurant.restaurantName = restaurantName
-        user.restaurant.restaurantDescription = restaurantDescription
-        user.restaurant.restaurantLocation = restaurantLocation
+        user.restaurant.nome = restaurantName
+        user.restaurant.description = restaurantDescription
+        user.restaurant.address = restaurantLocation
         
     } else { error.innerHTML = 'Please fill every single field properly' }
 }
 
 //#endregion
 //#region items 
-const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;">
+const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 700px; ">
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>

@@ -5,6 +5,7 @@ let checkoutN = document.getElementById('checkoutN')
 let checkoutLink = document.getElementById('checkoutLink')
 
 let restaurantName 
+let restaurantAddress
 
 checkoutLink.addEventListener('click', event => {
    sessionStorage.setItem('checkoutN', checkoutN.innerHTML)
@@ -35,6 +36,7 @@ Array.from(restaurants).forEach(element => {
          {
          platesContainer.innerHTML = `<h1 class="text-4xl mt-4 text-purple-600 text-center">${maker.restaurant.nome}</h1>`
          restaurantName = maker.restaurant.nome
+         restaurantAddress = maker.restaurant.address
          displayPlates(maker.restaurant.piatti_ordinabili)}})
          let buttons = document.getElementsByClassName('addBtn')
       
@@ -58,6 +60,7 @@ Array.from(restaurants).forEach(element => {
 
 
          platesArr.push(plate)
+
          sessionStorage.setItem('checkout', JSON.stringify(platesArr))
 
          checkoutN.innerHTML = Number(checkoutN.innerHTML) + 1
@@ -78,6 +81,7 @@ Array.from(restaurants).forEach(element => {
             platesArr.push(plate)
 
             sessionStorage.setItem('restaurantName', restaurantName)
+            sessionStorage.setItem('restuarantAddress', restaurantAddress)
             sessionStorage.setItem('checkout', JSON.stringify(platesArr))
             
             checkoutN.innerHTML = Number(checkoutN.innerHTML) + 1
@@ -121,6 +125,7 @@ slider.addEventListener('mousemove', (e) => {
 //#region functions 
 function displayPlates(plates){
    plates.forEach(plate => {
+      if(plate.nome_piatto != undefined){
       platesContainer.innerHTML += `
       <div class="flex mt-10 mx-10">
          <p class="flex-1 text-2xl">${plate.nome_piatto}</p>
@@ -129,6 +134,13 @@ function displayPlates(plates){
          <button class="bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 rounded mb-2 addBtn">Add</button>
       </div>
       <hr class="mx-10">`
+      }else{
+         platesContainer.innerHTML += `
+      <div class="flex mt-10 mx-10">
+         <p class="flex-1 text-2xl">No plates yet</p>
+      </div>
+      <hr class="mx-10">`
+      }
    })
 }
 
@@ -142,7 +154,7 @@ function displayRestaurants(){
    makers.map(maker => {
       if(maker.restaurant.description == undefined) maker.restaurant.description = ""
    card = `<div>
-            <div class="card rest p-3 shadow" style="width: 18rem; margin-right: 20px; margin-left: 20px">
+            <div class="card rest p-3 shadow" style="width: 18rem; margin-right: 20px; margin-left: 20px ; max-height: 200px; height: 200px;">
                <div class="card-body">
                   <h5 class="card-title text-2xl" id='name'}>${maker.restaurant.nome}</h5>
                      <h6 class="card-subtitle mb-2 text-muted">${maker.restaurant.address}</h6>

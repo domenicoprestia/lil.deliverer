@@ -1,6 +1,11 @@
 let orders = document.getElementById('order')
 let totalPrice = document.getElementById('totalPrice')
 let totalTime = document.getElementById('totalTime')
+let checkout = document.getElementById('checkout')
+
+let order = { 
+   orders: []
+}
 
 document.addEventListener('DOMContentLoaded', event => {
    checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
@@ -8,6 +13,36 @@ document.addEventListener('DOMContentLoaded', event => {
 
 displayOrders()
 
+checkout.addEventListener('click', event => {
+   
+   if(!JSON.parse(localStorage.getItem('ordersInQue')))
+   {
+
+      let ordersArr = []
+   order.totalPrice = totalPrice.innerHTML.trim('€','')
+   order.totalTime = totalTime.innerHTML.trim(' mins', '')
+   order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
+   order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
+   order.sender = sessionStorage.getItem('restaurantName')
+   order.senderAddress = sessionStorage.getItem('restuarantAddress')
+   ordersArr.push(order)
+   localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
+
+   }else{
+
+      let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
+      order.totalPrice = totalPrice.innerHTML.trim('€','')
+      order.totalTime = totalTime.innerHTML.trim(' mins', '')
+      order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
+      order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
+      order.sender = sessionStorage.getItem('restaurantName')
+      order.senderAddress = sessionStorage.getItem('restuarantAddress')
+      ordersArr.push(order)
+      localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
+
+   }
+
+})
 
 //#region functions
 function displayOrders(){
@@ -21,12 +56,14 @@ function displayOrders(){
       </div>
       <hr class="mx-10">`
 
-     
+      order.orders.push(ordine)
 
-      totalPrice.innerHTML = Number(totalPrice.innerText) + Number(ordine.price.replace('€', '').trim())
+      totalPrice.innerHTML = (Number(totalPrice.innerText) + Number(ordine.price.replace('€', '').trim())).toFixed(2)
       totalTime.innerHTML = Number(totalTime.innerText) + Number(ordine.minutes.replace(' mins', ''))
    });
    totalPrice.innerHTML += '€'
    totalTime.innerHTML += ' mins'
+
+
 }
 //#endregion
