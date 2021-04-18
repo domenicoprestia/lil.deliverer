@@ -15,7 +15,13 @@ displayOrders()
 
 checkout.addEventListener('click', event => {
    
-   function distanceCalculater(){
+   async function distanceCalculater(recipientAddress, senderAddress){
+
+      var recipientGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/outputFormat?address=${recipientAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`)
+      var senderGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/outputFormat?address=${senderAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`)
+
+      console.log(recipientGeo, senderGeo)
+
       var origin1 = new google.maps.LatLng(55.930385, -3.118425);
       var origin2 = 'Greenwich, England';
       var destinationA = 'Stockholm, Sweden';
@@ -50,8 +56,12 @@ checkout.addEventListener('click', event => {
    order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
    order.sender = sessionStorage.getItem('restaurantName')
    order.senderAddress = sessionStorage.getItem('restuarantAddress')
+
+   distanceCalculater(order.recipientAddress, order.senderAddress)
+
    ordersArr.push(order)
    localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
+
 
    }else{
 

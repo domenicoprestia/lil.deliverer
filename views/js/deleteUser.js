@@ -1,9 +1,9 @@
 let del = document.getElementById("deleteAccount")
 
 del.addEventListener("click", () => {
-    var r = confirm("do you really want to delete your account?")
+    var confermation = confirm("do you really want to delete your account?")
 
-    if(r){
+    if(confermation){
         usersArr = JSON.parse(localStorage.getItem("users"))
         currentUsers = JSON.parse(sessionStorage.getItem("logged"))
         usersArr.forEach((user, index) => {if(user.username == currentUsers.username) usersArr.splice(index, 1)})

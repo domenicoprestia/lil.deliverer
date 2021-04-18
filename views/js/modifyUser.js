@@ -114,7 +114,7 @@ modifyButton.addEventListener('click', () => {
     userm = validatorProfile()
     const error = document.getElementById('error')
     error.innerHTML = ''
-    if (userm != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email' && user != 'This username already exists') {
+    if (userm != 'check your password, it must be the same of confirm password and at least 8 char long' && userm != 'insert valid username and email' && userm != 'This username already exists') {
         main.innerHTML = formLInfos
         
         document.getElementById("address").value = String(loggedUser.address.position)
@@ -135,7 +135,7 @@ modifyButton.addEventListener('click', () => {
                 window.location.replace('../main/main.html')
             }
             })
-        } else error.innerHTML = user
+        } else error.innerHTML = userm
     })     
 
     
