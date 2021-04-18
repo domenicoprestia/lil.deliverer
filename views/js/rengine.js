@@ -92,7 +92,7 @@ maker.addEventListener('click', function() {
                 if(user.restaurant.address){
                 await storeUser(user)
                 storeLog(user)
-                window.location.replace('../main/main.html')
+                window.location.replace('/views/main/main.html')
             }
 
             })
@@ -121,7 +121,7 @@ lover.addEventListener('click', function() {
                 if(user.address.position){
                 await storeUser(user)
                 await storeLog(user)
-                window.location.replace('../main/main.html')
+                window.location.replace('/views/main/main.html')
             }
             })
         } else error.innerHTML = user

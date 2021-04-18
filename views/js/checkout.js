@@ -13,43 +13,55 @@ document.addEventListener('DOMContentLoaded', event => {
 
 displayOrders()
 
-checkout.addEventListener('click', event => {
-   
+checkout.addEventListener('click', async event => {
+
    async function distanceCalculater(recipientAddress, senderAddress){
 
-      var recipientGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/outputFormat?address=${recipientAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`)
-      var senderGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/outputFormat?address=${senderAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`)
 
-      console.log(recipientGeo, senderGeo)
+      r = recipientAddress.split(',')
+      r.splice(r.length, 1)
+      
+      recipientAddress = r.join(',')
 
-      var origin1 = new google.maps.LatLng(55.930385, -3.118425);
-      var origin2 = 'Greenwich, England';
-      var destinationA = 'Stockholm, Sweden';
-      var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+      s = senderAddress.split(',')
+      s.splice(r.length, 1)
+      
+      senderAddress = s.join(',')
 
-      var service = new google.maps.DistanceMatrixService();
-      service.getDistanceMatrix(
-      {
-         origins: [origin1, origin2],
-         destinations: [destinationA, destinationB],
-         travelMode: 'DRIVING',
-         transitOptions: TransitOptions,
-         drivingOptions: DrivingOptions,
-         unitSystem: UnitSystem,
-         avoidHighways: Boolean,
-         avoidTolls: Boolean,
-      }, callback);
+      console.log(recipientAddress, senderAddress)
 
-      function callback(response, status) {
-      // See Parsing the Results for
-      // the basics of a callback function.
-      }
+      var rGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${recipientAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
+      var sGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${senderAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
+
+
+      let rLat = rGeo.results[0].geometry.location.lat
+      let rLon = rGeo.results[0].geometry.location.lng
+
+      let sLat = sGeo.results[0].geometry.location.lat
+      let sLon = sGeo.results[0].geometry.location.lng
+
+
+      const matrix = new google.maps.DistanceMatrixService();
+      var d = $.Deferred();
+      matrix.getDistanceMatrix({
+        origins: [new google.maps.LatLng(rLat, rLon)],
+        destinations: [new google.maps.LatLng(sLat, sLon)],
+        travelMode: google.maps.TravelMode.DRIVING,
+      }, function(response, status) {
+         if (status != google.maps.DistanceMatrixStatus.OK) {
+            d.reject(status);
+         } else {
+            d.resolve(response);
+         }
+      });
+
+      return d.promise()
    }
 
    if(!JSON.parse(localStorage.getItem('ordersInQue')))
    {
 
-      let ordersArr = []
+   let ordersArr = []
    order.totalPrice = totalPrice.innerHTML.trim('€','')
    order.totalTime = totalTime.innerHTML.trim(' mins', '')
    order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
@@ -57,25 +69,44 @@ checkout.addEventListener('click', event => {
    order.sender = sessionStorage.getItem('restaurantName')
    order.senderAddress = sessionStorage.getItem('restuarantAddress')
 
-   distanceCalculater(order.recipientAddress, order.senderAddress)
+   let data = await distanceCalculater(order.recipientAddress, order.senderAddress)
+   order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', ''))
+   order.totalDistance = data.rows[0].elements[0].distance.text
+   order.totalTime += ' mins'
+
+   console.log(order)
 
    ordersArr.push(order)
    localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
 
 
    }else{
-
       let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
-      order.totalPrice = totalPrice.innerHTML.trim('€','')
-      order.totalTime = totalTime.innerHTML.trim(' mins', '')
+      order.totalPrice = totalPrice.innerHTML.replace('€','')
+      order.totalTime = totalTime.innerHTML.replace(' mins', '')
       order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
       order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
       order.sender = sessionStorage.getItem('restaurantName')
       order.senderAddress = sessionStorage.getItem('restuarantAddress')
+
+      let data = await distanceCalculater(order.recipientAddress, order.senderAddress)
+      order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', '')) 
+      order.totalTime += ' mins'
+      order.totalDistance = data.rows[0].elements[0].distance.text
+      
+      console.log(order)
+
       ordersArr.push(order)
       localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
-
    }
+
+   sessionStorage.removeItem('checkout')
+   sessionStorage.removeItem('restaurantName')
+   sessionStorage.removeItem('checkoutN')
+   sessionStorage.removeItem('restaurantAddress')
+   
+
+   window.location.replace('/views/main/main.html')
 
 })
 
