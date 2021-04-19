@@ -235,7 +235,7 @@ async function validatorMaker() {
 
 //#endregion
 //#region items 
-const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 700px; ">
+const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col wrapper-reg" style="width: 700px; ">
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
         <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>

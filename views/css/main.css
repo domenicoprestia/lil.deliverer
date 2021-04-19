@@ -23,12 +23,16 @@ body {
 }
 
 .wrapper-registration {
-  margin-left: 800px;
+  margin-left: 220%;
 }
 
 .wrapper-selector {
   margin-top: 40vh;
-  margin-left: 85vh;
+  margin-left: 260%;
+}
+
+.wrapper-reg {
+  margin-left: 190%;
 }
 
 .cont {
@@ -91,6 +95,14 @@ body {
     margin-top: 40vh;
     margin-left: 40vh;
   }
+
+  .wrapper-registration {
+    margin-left: 110%;
+  }
+
+  .wrapper-reg {
+    margin-left: 80%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -138,7 +150,10 @@ body {
   }
 
   .wrapper-registration {
-    margin-left: -30px;
-    margin-right: 30px;
+    margin-left: -10px;
+  }
+
+  .wrapper-reg {
+    margin-left: -100px;
   }
 }
