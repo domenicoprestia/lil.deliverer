@@ -89,43 +89,43 @@ checkout.addEventListener('click', async event => {
       if(!JSON.parse(localStorage.getItem('ordersInQue')))
       {
 
-      let ordersArr = []
-      order.totalPrice = totalPrice.innerHTML.trim('€','')
-      order.totalTime = totalTime.innerHTML.trim(' mins', '')
-      order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
-      order.recipientAddress = recipientAddress
-      order.sender = senderAddress
-      order.senderAddress = sessionStorage.getItem('restuarantAddress')
-      order.deliverType = deliverType
-
-      order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', ''))
-      order.totalDistance = data.rows[0].elements[0].distance.text
-      order.totalTime += ' mins'
-
-      console.log(order)
-
-      ordersArr.push(order)
-      localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
-
-
-      }else{
-         let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
-         order.totalPrice = totalPrice.innerHTML.replace('€','')
-         order.totalTime = totalTime.innerHTML.replace(' mins', '')
+         let ordersArr = []
+         order.totalPrice = totalPrice.innerHTML.trim('€','')
+         order.totalTime = totalTime.innerHTML.trim(' mins', '')
          order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
          order.recipientAddress = recipientAddress
          order.sender = senderAddress
          order.senderAddress = sessionStorage.getItem('restuarantAddress')
          order.deliverType = deliverType
 
-         order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', '')) 
-         order.totalTime += ' mins'
+         order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', ''))
          order.totalDistance = data.rows[0].elements[0].distance.text
-         
+         order.totalTime += ' mins'
+
          console.log(order)
 
          ordersArr.push(order)
          localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
+
+
+         }else{
+            let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
+            order.totalPrice = totalPrice.innerHTML.replace('€','')
+            order.totalTime = totalTime.innerHTML.replace(' mins', '')
+            order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
+            order.recipientAddress = recipientAddress
+            order.sender = senderAddress
+            order.senderAddress = sessionStorage.getItem('restuarantAddress')
+            order.deliverType = deliverType
+
+            order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', '')) 
+            order.totalTime += ' mins'
+            order.totalDistance = data.rows[0].elements[0].distance.text
+            
+            console.log(order)
+
+            ordersArr.push(order)
+            localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
       }
 
       sessionStorage.removeItem('checkout')
