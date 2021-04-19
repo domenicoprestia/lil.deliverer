@@ -4,6 +4,7 @@ let totalTime = document.getElementById('totalTime')
 let checkout = document.getElementById('checkout')
 let delivery = document.getElementById('delivery')
 let withdrawal = document.getElementById('withdrawal')
+let deleteButtons
 
 let order = { 
    orders: []
@@ -111,15 +112,14 @@ checkout.addEventListener('click', async event => {
          }else{
             let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
             order.totalPrice = totalPrice.innerHTML.replace('€','')
-            order.totalTime = totalTime.innerHTML.replace(' mins', '')
+            order.preparationTime = totalTime.innerHTML
             order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
             order.recipientAddress = recipientAddress
             order.sender = senderAddress
             order.senderAddress = sessionStorage.getItem('restuarantAddress')
             order.deliverType = deliverType
 
-            order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', '')) 
-            order.totalTime += ' mins'
+            order.trackTime = data.rows[0].elements[0].duration.text
             order.totalDistance = data.rows[0].elements[0].distance.text
             
             console.log(order)
@@ -147,6 +147,7 @@ function displayOrders(){
          <p class="flex-1 text-2xl">${ordine.name}</p>
          <p class="w-1/6 text-l text-gray-600">${ordine.minutes}</p>
          <p class="w-1/10 mr-5 text-2xl">${ordine.price}</p>
+         <button class="delete bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 rounded mb-2">🗑️</button>
       </div>
       <hr class="mx-10">`
 
@@ -155,9 +156,37 @@ function displayOrders(){
       totalPrice.innerHTML = (Number(totalPrice.innerText) + Number(ordine.price.replace('€', '').trim())).toFixed(2)
       totalTime.innerHTML = Number(totalTime.innerText) + Number(ordine.minutes.replace(' mins', ''))
    });
+   
    totalPrice.innerHTML += '€'
    totalTime.innerHTML += ' mins'
-
+   
+   deleteButtons = document.getElementsByClassName("delete")
+   console.log(deleteButtons)
+   Array.from(deleteButtons).forEach(button => {
+   button.addEventListener("click", event => {
+      let name = event.target.parentNode.children[0].textContent
+      let plates = JSON.parse(sessionStorage.getItem("checkout"))
+      let newPlates = []
+      let check = false
+      plates.forEach(plate => {
+         if(name == plate.name && !check){
+            check = true
+         }else{
+            newPlates.push(plate)
+         }
+      })
+      sessionStorage.setItem("checkout", JSON.stringify(newPlates))
+      let n = sessionStorage.getItem("checkoutN")
+      n--
+      sessionStorage.setItem("checkoutN", n)
+      if(n == 0){
+         sessionStorage.removeItem("checkout")
+         sessionStorage.removeItem("checkoutN")
+         sessionStorage.removeItem("restaurantName")
+      }
+      window.location.reload()
+   })
+})
 
 }
 //#endregion
