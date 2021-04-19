@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
     <link rel="icon" href="../imgs/dwarf.ico" type="image/icon type">
     <title>lil.deliverer</title>
@@ -36,55 +39,47 @@
             <a class="nav-link" href="user.html">
                 <p class=" hover:text-purple-600">USER</p>
             </a>
-          <a class="nav-link" href="" id="logout">
-              <p class="hover:text-purple-600">LOGOUT</p>
+            <a class="nav-link" href="" id="logout">
+                <p class="hover:text-purple-600">LOGOUT</p>
             </a>
         </div>
     </nav>
-    <div id="main">
-        <div class="bg-grey-lighter min-h-screen flex flex-col wrapper-registration" style="width: 500px;" id="modifyPartOne">
-            <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>
-                    <form>
-                    <input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        id="username"
-                        placeholder="New username"/>
-                    
-                    <input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        id="fullname"
-                        placeholder="New Full Name"/>
-            
-                    <input 
-                        type="text"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        id="email"
-                        placeholder="New Email"/>
-            
-                    <input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        id="password"
-                        placeholder="New Password"/>
-                    <input 
-                        type="password"
-                        class="block border border-grey-light w-full p-3 rounded mb-4"
-                        id="confirm_password"
-                        placeholder="Confirm new Password"/>
-                        <label class="text-red-500" for="registrationlover" id="error"></label>
-                        <input type="submit" value="Modify" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px; align-items: center;" id="modifylover">
-                        
-                    </form>
-                    
+
+    <div style='display: flex; flex-direction: column; align-items: center; justify-content:center;'>
+        <div class="text-center" style="flex: 1; position:absolute;margin-top: 40%" id="main">
+            <div class="bg-grey-lighter min-h-screen flex flex-col" style="width: 500px;" id="modifyPartOne">
+                <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+                    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                        <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>
+                        <form>
+                            <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4"
+                                id="username" placeholder="New username" />
+
+                            <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4"
+                                id="fullname" placeholder="New Full Name" />
+
+                            <input type="text" class="block border border-grey-light w-full p-3 rounded mb-4" id="email"
+                                placeholder="New Email" />
+
+                            <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4"
+                                id="password" placeholder="New Password" />
+                            <input type="password" class="block border border-grey-light w-full p-3 rounded mb-4"
+                                id="confirm_password" placeholder="Confirm new Password" />
+                            <label class="text-red-500" for="registrationlover" id="error"></label>
+                            <input type="submit" value="Modify"
+                                class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer"
+                                style="width: 246px; align-items: center;" id="modifylover">
+
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </div>
     </div>
     <script src="../js/authChecker.js"></script>
     <script src="../js/modifyUser.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg&libraries=places"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg&libraries=places"></script>
     <script src="../js/Logout.js"></script>
 </body>
 
