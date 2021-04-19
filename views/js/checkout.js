@@ -60,12 +60,31 @@ checkout.addEventListener('click', async event => {
          return d.promise()
       }
 
-      if(delivery.checked /*&& data.rows[0].elements[0].distance <= 50*/){
-         deliverType = delivery.value
+      var recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
+      var senderAddress = sessionStorage.getItem('restuarantAddress')
+      let data = await distanceCalculater(recipientAddress, senderAddress)
+
+      tmpDistanceArr = data.rows[0].elements[0].distance.text.split(' ')
+      tmpDistanceArr.splice(tmpDistanceArr.length, 1)
+
+      console.log(tmpDistanceArr[0])
+      
+
+      if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
+         withdrawal.checked = true
+         delivery.disabled = true
+         document.getElementById("distanceError").innerHTML = "home delivery is possible only for distance under 50 km"
       }
       else{
-         deliverType = withdrawal.value
+         
+         if(delivery.checked){
+            deliverType = delivery.value
+         }
+         else{
+            deliverType = withdrawal.value
+         }
       }
+
 
       if(!JSON.parse(localStorage.getItem('ordersInQue')))
       {
@@ -74,12 +93,11 @@ checkout.addEventListener('click', async event => {
       order.totalPrice = totalPrice.innerHTML.trim('€','')
       order.totalTime = totalTime.innerHTML.trim(' mins', '')
       order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
-      order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
-      order.sender = sessionStorage.getItem('restaurantName')
+      order.recipientAddress = recipientAddress
+      order.sender = senderAddress
       order.senderAddress = sessionStorage.getItem('restuarantAddress')
       order.deliverType = deliverType
 
-      let data = await distanceCalculater(order.recipientAddress, order.senderAddress)
       order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', ''))
       order.totalDistance = data.rows[0].elements[0].distance.text
       order.totalTime += ' mins'
@@ -95,12 +113,11 @@ checkout.addEventListener('click', async event => {
          order.totalPrice = totalPrice.innerHTML.replace('€','')
          order.totalTime = totalTime.innerHTML.replace(' mins', '')
          order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
-         order.recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
-         order.sender = sessionStorage.getItem('restaurantName')
+         order.recipientAddress = recipientAddress
+         order.sender = senderAddress
          order.senderAddress = sessionStorage.getItem('restuarantAddress')
          order.deliverType = deliverType
 
-         let data = await distanceCalculater(order.recipientAddress, order.senderAddress)
          order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', '')) 
          order.totalTime += ' mins'
          order.totalDistance = data.rows[0].elements[0].distance.text
