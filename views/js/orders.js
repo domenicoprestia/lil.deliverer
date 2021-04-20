@@ -14,6 +14,11 @@ function displayOrders(){
     let loggedUser = JSON.parse(sessionStorage.getItem('logged'))
     let userOrders = []
 
+
+    if(totalOrders == null){
+        document.getElementById('title').textContent = 'You have no orders! ☁️'
+    }
+
     totalOrders.forEach(order => {
         if(order.recipient === loggedUser.username){
             userOrders.push(order)

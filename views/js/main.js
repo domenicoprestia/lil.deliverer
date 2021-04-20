@@ -146,12 +146,24 @@ function displayPlates(plates){
 
 function displayRestaurants(){
    let data = JSON.parse(localStorage.getItem('users'))
+   let ordersInQue = JSON.parse(localStorage.getItem('ordersInQue'))
+   let timeQue = 0
+
    let makers = []
    data.forEach(maker => {
       if(maker.maker) makers.push(maker)
    })
 
    makers.map(maker => {
+
+      if(ordersInQue){
+         ordersInQue.forEach(order => {
+            if(order.sender == maker.restaurant.nome && order.senderAddress == maker.restaurant.address){
+               timeQue += 10
+            }
+         })
+      }
+
       if(maker.restaurant.description == undefined) maker.restaurant.description = ""
    card = `<div>
             <div class="card rest p-3 shadow" style="width: 18rem; margin-right: 20px; margin-left: 20px ; max-height: 200px; height: 200px;">
@@ -160,9 +172,11 @@ function displayRestaurants(){
                      <h6 class="card-subtitle mb-2 text-muted">${maker.restaurant.address}</h6>
                   <p class="card-text">${maker.restaurant.description}</p>
                   <p class="card-text" id="user">${maker.username}</p>
+                  <p class="card-text">average ${timeQue} mins of waiting</p>
             </div>
          </div>`
    restaurantContainer.innerHTML += card
+   timeQue = 0
    })}
 
 

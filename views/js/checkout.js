@@ -12,6 +12,10 @@ let order = {
 
 document.addEventListener('DOMContentLoaded', event => {
    checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
+   if(checkoutN.innerHTML == 0){
+      document.getElementById('formCont').innerHTML = ``
+      document.getElementById('title').textContent = 'Your checkout is empty! 😢'
+   }
 })
 
 displayOrders()
@@ -113,8 +117,23 @@ checkout.addEventListener('click', async event => {
 
          }else{
             let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
+            let timeQue = 0
+
+            let n = sessionStorage.getItem('restaurantName')
+            let a = sessionStorage.getItem('restuarantAddress')
+
+            
+
+            
+
+            ordersArr.forEach(ord => {
+               if(ord.sender == n && ord.senderAddress == a){
+                  timeQue += 10
+               }
+            })
+
             order.totalPrice = totalPrice.innerHTML
-            order.preparationTime = totalTime.innerHTML
+            order.preparationTime = totalTime.innerHTML + `+ ${timeQue} mins of que`
             order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
             order.recipientAddress = recipientAddress
             order.sender = sessionStorage.getItem('restaurantName')
@@ -136,7 +155,7 @@ checkout.addEventListener('click', async event => {
       sessionStorage.removeItem('restaurantAddress')
       
 
-      window.location.replace('/views/main/main.html')
+      window.location.replace('/views/main/orders.html')
    }
    else{
       document.getElementById("distanceError").innerHTML = "the service of this restaurant is not aviabile in your location"
