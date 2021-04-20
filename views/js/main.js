@@ -54,8 +54,8 @@ Array.from(restaurants).forEach(element => {
 
          let plate = {
             name: event.target.parentNode.children[0].textContent,
-            minutes: event.target.parentNode.children[1].textContent,
-            price: event.target.parentNode.children[2].textContent
+            minutes: event.target.parentNode.children[3].textContent,
+            price: event.target.parentNode.children[4].textContent
             }
 
 
@@ -74,8 +74,8 @@ Array.from(restaurants).forEach(element => {
 
             let plate = {
                name: event.target.parentNode.children[0].textContent,
-               minutes: event.target.parentNode.children[1].textContent,
-               price: event.target.parentNode.children[2].textContent
+               minutes: event.target.parentNode.children[3].textContent,
+               price: event.target.parentNode.children[4].textContent
                }
 
             platesArr.push(plate)
@@ -124,16 +124,26 @@ slider.addEventListener('mousemove', (e) => {
 //#endregion
 //#region functions 
 function displayPlates(plates){
+   let veg = ''
+   let bio = ''
    plates.forEach(plate => {
       if(plate.nome_piatto != undefined){
+
+         if(plate.vegetariano) veg = 'veg'
+         if(plate.biologico) bio = 'bio'
+
       platesContainer.innerHTML += `
       <div class="flex mt-10 mx-10">
          <p class="flex-1 text-2xl">${plate.nome_piatto}</p>
+         <p class="w-1/6 text-l text-green-600">${veg}</p>
+         <p class="w-1/6 text-l text-green-600">${bio}</p>
          <p class="w-1/6 text-l text-gray-600">${plate.tempo_preparazione} <span>mins</span></p>
          <p class="w-1/10 mr-5 text-2xl">${plate.prezzo}€</p>
          <button class="bg-purple-600 hover:bg-purple-800 text-white font-bold px-2 py-1 rounded mb-2 addBtn">Add</button>
       </div>
       <hr class="mx-10">`
+      veg = ''
+      bio = ''
       }else{
          platesContainer.innerHTML += `
       <div class="flex mt-10 mx-10">
