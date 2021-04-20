@@ -77,9 +77,14 @@ checkout.addEventListener('click', async event => {
       tmpDistanceArr.splice(tmpDistanceArr.length, 1)
       tmpDistanceArr[0].replace(',','.')
 
-      
+      let deliveryPrice
+
+      if(Number(tmpDistanceArr[0] < 50)){
       tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
-      let deliveryPrice = parseFloat(tmpDistanceArr[0]*0.3).toFixed(2)
+      deliveryPrice = parseFloat(tmpDistanceArr[0]*0.3).toFixed(2)}
+      else{
+         deliveryPrice = 0
+      }
 
       if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
          withdrawal.checked = true
