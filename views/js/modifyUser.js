@@ -158,8 +158,8 @@ modifyButton.addEventListener('click', () => {
                         payment: {},
                         address: {coordinate: {}},
                         privacy: {
-                            offerte_personalizzate: true,
-                            consenso_privacy: true
+                            offerte_personalizzate: document.getElementById('advertisement').checked,
+                            consenso_privacy: document.getElementById('privacy').checked
                         }
                     }
                 } else { return 'check your password, it must be the same of confirm password and at least 8 char long' }
@@ -220,6 +220,8 @@ const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col" styl
                     id="cardName"
                     placeholder="new Name on the card" />
 
+                
+            
 
             <label class="text-red-500" for="registrationlover2" id="errorL2"></label>
             <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover2">

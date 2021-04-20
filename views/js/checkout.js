@@ -18,6 +18,8 @@ displayOrders()
 
 checkout.addEventListener('click', async event => {
    if(delivery.checked || withdrawal.checked){
+      
+      
       async function distanceCalculater(recipientAddress, senderAddress){
 
 
@@ -46,12 +48,13 @@ checkout.addEventListener('click', async event => {
 
          const matrix = new google.maps.DistanceMatrixService();
          var d = $.Deferred();
+         
          matrix.getDistanceMatrix({
          origins: [new google.maps.LatLng(rLat, rLon)],
          destinations: [new google.maps.LatLng(sLat, sLon)],
          travelMode: google.maps.TravelMode.DRIVING,
          }, function(response, status) {
-            if (status != google.maps.DistanceMatrixStatus.OK) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {     //OK == HTTP status 200 != OK means 400/500/300
                d.reject(status);
             } else {
                d.resolve(response);
@@ -65,10 +68,9 @@ checkout.addEventListener('click', async event => {
       var senderAddress = sessionStorage.getItem('restuarantAddress')
       let data = await distanceCalculater(recipientAddress, senderAddress)
 
+      if(data.rows[0].elements[0].distance != undefined){
       tmpDistanceArr = data.rows[0].elements[0].distance.text.split(' ')
       tmpDistanceArr.splice(tmpDistanceArr.length, 1)
-
-      console.log(tmpDistanceArr[0])
       
 
       if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
@@ -91,7 +93,7 @@ checkout.addEventListener('click', async event => {
       {
 
          let ordersArr = []
-         order.totalPrice = totalPrice.innerHTML.trim('€','')
+         order.totalPrice = totalPrice.innerHTML
          order.preparationTime = totalTime.innerHTML
          order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
          order.recipientAddress = recipientAddress
@@ -111,7 +113,7 @@ checkout.addEventListener('click', async event => {
 
          }else{
             let ordersArr = JSON.parse(localStorage.getItem('ordersInQue'))
-            order.totalPrice = totalPrice.innerHTML.replace('€','')
+            order.totalPrice = totalPrice.innerHTML
             order.preparationTime = totalTime.innerHTML
             order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
             order.recipientAddress = recipientAddress
@@ -135,6 +137,10 @@ checkout.addEventListener('click', async event => {
       
 
       window.location.replace('/views/main/main.html')
+   }
+   else{
+      document.getElementById("distanceError").innerHTML = "the service of this restaurant is not aviabile in your location"
+   }
    }
 })
 

@@ -176,8 +176,8 @@ function validatorProfile() {
                     payment: {},
                     address: {coordinate: {}},
                     privacy: {
-                        offerte_personalizzate: true,
-                        consenso_privacy: true
+                        offerte_personalizzate: document.getElementById('advertisement').checked,
+                        consenso_privacy: document.getElementById('privacy').checked
                       }
                 }
             }
@@ -268,17 +268,21 @@ const formL = `<div class="bg-grey-lighter min-h-screen flex flex-col" style="wi
             class="block border border-grey-light w-full p-3 rounded mb-4"
             id="confirm_password"
             placeholder="Confirm Password" />
+
+            <input type='checkbox' id='privacy' name='privacy'>
+       
+            <label for="privacy">By signing up, you agree to the 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="/views/privacy/privacypolicy.pdf" target=_blank>
+                Privacy Policy
+            </a></label><br>
+            <input type='checkbox' id='advertisement' name='advertisement'>
+            <label for="advertisement">By checking you agree to the advertisement policy</label><br>
+        
             <label class="text-red-500" for="registrationlover" id="error"></label>
-            <input type="submit" value="Register" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover">
+            <input type="submit" value="Register" class="btn mt-3 text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover">
         </form>
         <div class="text-center text-sm text-grey-dark mt-4">
-            By signing up, you agree to the 
-            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
-                Terms of Service
-            </a> and 
-            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
-                Privacy Policy
-            </a>
+            
         </div>
     </div>
 
@@ -324,18 +328,20 @@ const formM = `<div class="bg-grey-lighter min-h-screen flex flex-col" style="wi
             class="block border border-grey-light w-full p-3 rounded mb-4"
             id="confirm_password"
             placeholder="Confirm Password" />
-            <label class="text-red-500" for="registrationmaker" id="error"></label>
-            <input type="submit" value="Register" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationmaker">
-        </form>
-        <div class="text-center text-sm text-grey-dark mt-4">
-            By signing up, you agree to the 
-            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
-                Terms of Service
-            </a> and 
-            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
+            
+            <input type='checkbox' id='privacy' name='privacy'>
+       
+            <label for="privacy">By signing up, you agree to the 
+            <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="/views/privacy/privacypolicy.pdf" target=_blank>
                 Privacy Policy
-            </a>
-        </div>
+            </a></label><br>
+            <input type='checkbox' id='advertisement' name='advertisement'>
+            <label for="advertisement">By checking you agree to the advertisement policy</label><br>
+
+            <label class="text-red-500" for="registrationmaker" id="error"></label>
+            <input type="submit" value="Register" class="btn mt-3 text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationmaker">
+        </form>
+        
     </div>
 
     <div class="text-grey-dark mt-6">
