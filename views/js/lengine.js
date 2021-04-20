@@ -18,7 +18,7 @@ maker.addEventListener('click', function() {
        console.log(checkLog)
        if(checkLog){
             storeLog(userLog)
-            window.location.replace('../main/main.html')
+            window.location.replace('/views/main/main.html')
         }
         else{
             document.getElementById("error").innerHTML = "Incorrect username or password"
