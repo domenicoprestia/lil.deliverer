@@ -67,7 +67,7 @@ Array.from(restaurants).forEach(element => {
          
          }
          else if(sessionStorage.getItem('restaurantName') != restaurantName && sessionStorage.getItem('restaurantName') != undefined){
-            alert('Scegli piatti dello stesso ristorante')
+            alert('Choose plates of the same restaurant')
          }
          else{
             let platesArr = []

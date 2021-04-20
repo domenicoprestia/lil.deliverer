@@ -79,11 +79,12 @@ checkout.addEventListener('click', async event => {
 
       let deliveryPrice
 
-      if(Number(tmpDistanceArr[0] < 50)){
+      if(Number(parseFloat(tmpDistanceArr[0]) < 51)){
       tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
       deliveryPrice = parseFloat(tmpDistanceArr[0]*0.3).toFixed(2)}
       else{
          deliveryPrice = 0
+         tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
       }
 
       if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
