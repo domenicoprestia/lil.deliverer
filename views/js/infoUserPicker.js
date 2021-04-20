@@ -1,5 +1,12 @@
 let loggedUser = JSON.parse(sessionStorage.getItem("logged"))
 
+document.addEventListener('DOMContentLoaded', event => {
+    checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
+    if(checkoutN.innerHTML == 0){
+       document.getElementById('formCont').innerHTML = ``
+    }
+ })
+
 document.getElementById("name").innerHTML = String(loggedUser.fullname)
 document.getElementById("email").innerHTML = String(loggedUser.email)
 document.getElementById("username").innerHTML = String(loggedUser.username)

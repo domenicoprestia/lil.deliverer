@@ -9,7 +9,7 @@ del.addEventListener("click", () => {
         usersArr.forEach((user, index) => {if(user.username == currentUsers.username) usersArr.splice(index, 1)})
         localStorage.setItem("users", JSON.stringify(usersArr))
         sessionStorage.removeItem("logged")
-        location.replace("/views/index.html")
+        location.replace("../index.html")
     }
 })
 

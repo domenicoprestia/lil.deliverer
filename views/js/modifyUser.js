@@ -4,6 +4,12 @@ var exists = document.getElementById("modifyPartOne")
 
 var oldUsername = loggedUser.username
 
+document.addEventListener('DOMContentLoaded', event => {
+    checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
+    if(checkoutN.innerHTML == 0){
+       document.getElementById('formCont').innerHTML = ``
+    }
+ })
 
 if(exists){
     document.getElementById("username").value = String(loggedUser.username)
@@ -132,7 +138,7 @@ modifyButton.addEventListener('click', () => {
                 if(userm.address.position){
                 await storeUser(userm)
                 await storeLog(userm)
-                window.location.replace('../main/main.html')
+                window.location.replace('/views/main/main.html')
             }
             })
         } else error.innerHTML = userm
