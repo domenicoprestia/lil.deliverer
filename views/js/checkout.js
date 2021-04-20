@@ -92,20 +92,20 @@ checkout.addEventListener('click', async event => {
 
          let ordersArr = []
          order.totalPrice = totalPrice.innerHTML.trim('€','')
-         order.totalTime = totalTime.innerHTML.trim(' mins', '')
+         order.preparationTime = totalTime.innerHTML
          order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
          order.recipientAddress = recipientAddress
-         order.sender = senderAddress
-         order.senderAddress = sessionStorage.getItem('restuarantAddress')
+         order.sender = sessionStorage.getItem('restaurantName')
+         order.senderAddress = senderAddress
          order.deliverType = deliverType
 
-         order.totalTime = Number(order.totalTime) + Number(data.rows[0].elements[0].duration.text.trim().replace('min', ''))
+         order.trackTime = data.rows[0].elements[0].duration.text
          order.totalDistance = data.rows[0].elements[0].distance.text
-         order.totalTime += ' mins'
+         
 
          console.log(order)
-
          ordersArr.push(order)
+
          localStorage.setItem('ordersInQue', JSON.stringify(ordersArr))
 
 
@@ -115,8 +115,8 @@ checkout.addEventListener('click', async event => {
             order.preparationTime = totalTime.innerHTML
             order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
             order.recipientAddress = recipientAddress
-            order.sender = senderAddress
-            order.senderAddress = sessionStorage.getItem('restuarantAddress')
+            order.sender = sessionStorage.getItem('restaurantName')
+            order.senderAddress = senderAddress
             order.deliverType = deliverType
 
             order.trackTime = data.rows[0].elements[0].duration.text
