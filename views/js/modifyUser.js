@@ -196,7 +196,7 @@ modifyButton.addEventListener('click', () => {
 const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col" style="width: 500px;">
 <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
     <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-        <h1 class="mb-8 text-3xl text-center">Sign up food-lover!</h1>
+        <h1 class="mb-8 text-3xl text-center">modification food-lover!</h1>
         <form>
         <input 
             type="text"
@@ -233,7 +233,7 @@ const formLInfos = `<div class="bg-grey-lighter min-h-screen flex flex-col" styl
             <input type="submit" value="Proceed" class="btn text-black text-2xl bg-purple-600 border-purple-900 hover:bg-white hover:border-purple-600 cursor-pointer" style="width: 246px;" id="registrationlover2">
         </form>
         <div class="text-center text-sm text-grey-dark mt-4">
-            By signing up, you agree to the 
+            By modifying, you agree to the 
             <a class="no-underline border-b border-grey-dark text-grey-dark hover:text-purple-600" href="#">
                 Terms of Service
             </a> and 
