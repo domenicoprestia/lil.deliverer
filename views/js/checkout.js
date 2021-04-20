@@ -75,7 +75,11 @@ checkout.addEventListener('click', async event => {
       if(data.rows[0].elements[0].distance != undefined){
       tmpDistanceArr = data.rows[0].elements[0].distance.text.split(' ')
       tmpDistanceArr.splice(tmpDistanceArr.length, 1)
+      tmpDistanceArr[0].replace(',','.')
+
       
+      tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
+      let deliveryPrice = parseFloat(tmpDistanceArr[0]*0.3).toFixed(2)
 
       if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
          withdrawal.checked = true
@@ -98,6 +102,7 @@ checkout.addEventListener('click', async event => {
 
          let ordersArr = []
          order.totalPrice = totalPrice.innerHTML
+         order.deliveryPrice = deliveryPrice
          order.preparationTime = totalTime.innerHTML
          order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
          order.recipientAddress = recipientAddress
@@ -133,6 +138,7 @@ checkout.addEventListener('click', async event => {
             })
 
             order.totalPrice = totalPrice.innerHTML
+            order.deliveryPrice = deliveryPrice
             order.preparationTime = totalTime.innerHTML + `+ ${timeQue} mins of que`
             order.recipient = JSON.parse(sessionStorage.getItem('logged')).username
             order.recipientAddress = recipientAddress

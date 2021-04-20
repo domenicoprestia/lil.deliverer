@@ -53,7 +53,7 @@ function displayOrders(){
            <p class="flex-1 text-xl">${order.totalDistance}</p>
            <p class="w-1/6 text-l text-gray-600">${order.trackTime}</p>
            <p class="w-1/6 text-l text-gray-600">${order.preparationTime}</p>
-           <p class="w-1/10 mr-5 text-2xl">${order.totalPrice}</p>
+           <p class="w-1/10 mr-5 text-2xl">${order.totalPrice} + ${order.deliveryPrice}€ fee </p>
         </div>
         <hr class="mx-10">`
     })
