@@ -1,6 +1,6 @@
 let loggedUser = JSON.parse(sessionStorage.getItem("logged"))
 
-var exists = document.getElementById("modifyPartOne") 
+
 
 var oldUsername = loggedUser.username
 
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', event => {
     }
  })
 
-if(exists){
+
     document.getElementById("username").value = String(loggedUser.username)
     document.getElementById("fullname").value = String(loggedUser.fullname)
     document.getElementById("email").value = String(loggedUser.email)
     document.getElementById("password").value = String(loggedUser.password)
     document.getElementById("confirm_password").value = String(loggedUser.password)
-}
+
 
 function addressMaps(){
     //#region mapsApi
@@ -112,7 +112,7 @@ async function storeUser(user){
 
 let modifyButton = document.getElementById("modifylover")
 
-modifyButton.addEventListener('click', () => {
+modifyButton.addEventListener('click', (event) => {
 
     
     event.preventDefault()
@@ -151,8 +151,13 @@ modifyButton.addEventListener('click', () => {
         let email = document.getElementById('email').value
         let password = document.getElementById('password').value
         let confirmed_password = document.getElementById('confirm_password').value
-       //let usersArr = JSON.parse(localStorage.getItem('users'))
+        let usersArr = JSON.parse(localStorage.getItem('users'))
+        let same = false
+
+        if(usersArr)
+        usersArr.map(utente => {if(utente.username == String(username) && oldUsername != String(username)) {same = true} })
         
+        if(!same){
             if (username.length > 3 && fullname.length > 3 && email.includes('@')) {
                 if (password.length >= 8 && password == confirmed_password) {
                     return userm = {
@@ -170,7 +175,8 @@ modifyButton.addEventListener('click', () => {
                     }
                 } else { return 'check your password, it must be the same of confirm password and at least 8 char long' }
             } else { return 'insert valid username and email' }
-        }
+        } else{return 'This username already exists'}
+    }
     
     async function validatorLover(user) {
         const error = document.getElementById('errorL2')

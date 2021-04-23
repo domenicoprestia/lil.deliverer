@@ -22,51 +22,6 @@ displayOrders()
 
 checkout.addEventListener('click', async event => {
    if(delivery.checked || withdrawal.checked){
-      
-      
-      async function distanceCalculater(recipientAddress, senderAddress){
-
-
-         r = recipientAddress.split(',')
-         r.splice(r.length, 1)
-         
-         recipientAddress = r.join(',')
-
-         s = senderAddress.split(',')
-         s.splice(r.length, 1)
-         
-         senderAddress = s.join(',')
-
-         console.log(recipientAddress, senderAddress)
-
-         var rGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${recipientAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
-         var sGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${senderAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
-
-
-         let rLat = rGeo.results[0].geometry.location.lat
-         let rLon = rGeo.results[0].geometry.location.lng
-
-         let sLat = sGeo.results[0].geometry.location.lat
-         let sLon = sGeo.results[0].geometry.location.lng
-
-
-         const matrix = new google.maps.DistanceMatrixService();
-         var d = $.Deferred();
-         
-         matrix.getDistanceMatrix({
-         origins: [new google.maps.LatLng(rLat, rLon)],
-         destinations: [new google.maps.LatLng(sLat, sLon)],
-         travelMode: google.maps.TravelMode.DRIVING,
-         }, function(response, status) {
-            if (status != google.maps.DistanceMatrixStatus.OK) {     //OK == HTTP status 200 != OK means 400/500/300
-               d.reject(status);
-            } else {
-               d.resolve(response);
-            }
-         });
-
-         return d.promise()
-      }
 
       var recipientAddress = `${JSON.parse(sessionStorage.getItem('logged')).address.position}, ${JSON.parse(sessionStorage.getItem('logged')).address.civic}`
       var senderAddress = sessionStorage.getItem('restuarantAddress')
@@ -79,13 +34,7 @@ checkout.addEventListener('click', async event => {
 
       let deliveryPrice
 
-      if(Number(parseFloat(tmpDistanceArr[0]) < 51)){
       tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
-      deliveryPrice = parseFloat(tmpDistanceArr[0]*0.3).toFixed(2)}
-      else{
-         deliveryPrice = 0
-         tmpDistanceArr[0] = parseFloat(tmpDistanceArr[0])
-      }
 
       if(Number(tmpDistanceArr[0]) > 50 && delivery.checked){
          withdrawal.checked = true
@@ -96,9 +45,11 @@ checkout.addEventListener('click', async event => {
          
          if(delivery.checked){
             deliverType = delivery.value
+            deliveryPrice = (tmpDistanceArr[0]*0.3).toFixed(2)
          }
          else{
             deliverType = withdrawal.value
+            deliveryPrice = 0
          }
       }
 
@@ -173,9 +124,56 @@ checkout.addEventListener('click', async event => {
       document.getElementById("distanceError").innerHTML = "the service of this restaurant is not aviabile in your location"
    }
    }
+   else{
+      document.getElementById("distanceError").innerHTML = "select delivery type"
+   }
 })
 
 //#region functions
+async function distanceCalculater(recipientAddress, senderAddress){
+
+
+   r = recipientAddress.split(',')
+   r.splice(r.length, 1)
+   
+   recipientAddress = r.join(',')
+
+   s = senderAddress.split(',')
+   s.splice(r.length, 1)
+   
+   senderAddress = s.join(',')
+
+   console.log(recipientAddress, senderAddress)
+
+   var rGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${recipientAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
+   var sGeo = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${senderAddress.trim()}&key=AIzaSyBIOSNb4gExHID1PWV07r94LXUF8Y7saAg`).then(response => response.json()).then(data => {return data})
+
+
+   let rLat = rGeo.results[0].geometry.location.lat
+   let rLon = rGeo.results[0].geometry.location.lng
+
+   let sLat = sGeo.results[0].geometry.location.lat
+   let sLon = sGeo.results[0].geometry.location.lng
+
+
+   const matrix = new google.maps.DistanceMatrixService();
+   var d = $.Deferred();
+   
+   matrix.getDistanceMatrix({
+   origins: [new google.maps.LatLng(rLat, rLon)],
+   destinations: [new google.maps.LatLng(sLat, sLon)],
+   travelMode: google.maps.TravelMode.DRIVING,
+   }, function(response, status) {
+      if (status != google.maps.DistanceMatrixStatus.OK) {     //OK == HTTP status 200 != OK means 400/500/300
+         d.reject(status);
+      } else {
+         d.resolve(response);
+      }
+   });
+
+   return d.promise()
+}
+
 function displayOrders(){
    let ordersArr = JSON.parse(sessionStorage.getItem('checkout'))
    ordersArr.forEach(ordine => {
