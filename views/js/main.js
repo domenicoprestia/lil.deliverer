@@ -6,6 +6,7 @@ let checkoutLink = document.getElementById('checkoutLink')
 
 let restaurantName 
 let restaurantAddress
+let piatti
 
 checkoutLink.addEventListener('click', event => {
    sessionStorage.setItem('checkoutN', checkoutN.innerHTML)
@@ -23,6 +24,7 @@ let restaurants = document.getElementsByClassName('rest')
 
 Array.from(restaurants).forEach(element => {
    element.addEventListener('click',async event => {
+
       let element = event.target
       platesContainer.innerHTML = ''
 
@@ -37,9 +39,12 @@ Array.from(restaurants).forEach(element => {
          platesContainer.innerHTML = `<h1 class="text-4xl mt-4 text-purple-600 text-center">${maker.restaurant.nome}</h1>`
          restaurantName = maker.restaurant.nome
          restaurantAddress = maker.restaurant.address
-         displayPlates(maker.restaurant.piatti_ordinabili)}})
+         displayPlates(maker.restaurant.piatti_ordinabili)
+         piatti = maker.restaurant.piatti_ordinabili
+      }})
+         
          let buttons = document.getElementsByClassName('addBtn')
-      
+
       Array.from(buttons).forEach(button => {
          button.addEventListener('click', async event => { 
 
@@ -49,15 +54,23 @@ Array.from(restaurants).forEach(element => {
          if(JSON.parse(sessionStorage.getItem('checkout')) && sessionStorage.getItem('restaurantName') == restaurantName){
          JSON.parse(sessionStorage.getItem('checkout')).forEach(plt => {platesArr.push(plt)})
          
+         let choosenPlate
 
+         piatti.forEach(p => {
+            if(p.nome_piatto == event.target.parentNode.children[0].textContent){
+               choosenPlate = p
+            }
+
+         })
          
 
          let plate = {
-            name: event.target.parentNode.children[0].textContent,
-            minutes: event.target.parentNode.children[3].textContent,
-            price: event.target.parentNode.children[4].textContent
+            name: choosenPlate.nome_piatto,
+            minutes: choosenPlate.tempo_preparazione,
+            price: choosenPlate.prezzo
             }
 
+         console.log(plate)
 
          platesArr.push(plate)
 

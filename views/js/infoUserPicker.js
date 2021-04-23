@@ -3,7 +3,7 @@ let loggedUser = JSON.parse(sessionStorage.getItem("logged"))
 document.addEventListener('DOMContentLoaded', event => {
     checkoutN.innerHTML = sessionStorage.getItem('checkoutN')
     if(checkoutN.innerHTML == 0){
-       document.getElementById('formCont').innerHTML = ``
+        checkoutN.innerHTML = ``
     }
  })
 

@@ -41,6 +41,50 @@
         "offerte_personalizzate": true,
         "consenso_privacy": true
       }
+    },
+    {
+      "username": "user3",
+      "fullname": "Andrea Rossi",
+      "email": "email@email.it",
+      "password": "pass3",
+      "genere": "M",
+      "payment": {
+        "cardNumber": "1234567891234"
+      },
+      "address":{ 
+        "position": "Via Caduti di Nassyria, 5, Bergamo",
+        "civic": "5",
+        "coordinate": {
+          "longitudine": 56.87,
+          "latitudine": 65.98
+        },
+      "privacy": {
+        "offerte_personalizzate": true,
+        "consenso_privacy": true
+      }
+    }
+    },
+    {
+      "username": "user4",
+      "fullname": "Andrea Rossi",
+      "email": "email@email.it",
+      "password": "pass4",
+      "genere": "M",
+      "payment": {
+        "cardNumber": "1234567891234"
+      },
+      "address":{ 
+        "position": "Via Caduti di Nassyria, 5, Bergamo",
+        "civic": "5",
+        "coordinate": {
+          "longitudine": 56.87,
+          "latitudine": 65.98
+        },
+      "privacy": {
+        "offerte_personalizzate": true,
+        "consenso_privacy": true
+      }
+    }
     }
   ]
 }
