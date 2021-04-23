@@ -45,7 +45,7 @@ checkout.addEventListener('click', async event => {
          
          if(delivery.checked){
             deliverType = delivery.value
-            deliveryPrice = (tmpDistanceArr[0]*0.3).toFixed(2)
+            deliveryPrice = (tmpDistanceArr[0]*0.2).toFixed(2)
          }
          else{
             deliverType = withdrawal.value

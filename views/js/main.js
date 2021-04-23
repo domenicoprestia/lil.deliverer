@@ -6,6 +6,7 @@ let checkoutLink = document.getElementById('checkoutLink')
 
 let restaurantName 
 let restaurantAddress
+let plates 
 
 checkoutLink.addEventListener('click', event => {
    sessionStorage.setItem('checkoutN', checkoutN.innerHTML)
@@ -39,6 +40,7 @@ Array.from(restaurants).forEach(element => {
          restaurantName = maker.restaurant.nome
          restaurantAddress = maker.restaurant.address
          displayPlates(maker.restaurant.piatti_ordinabili)
+         plates = maker.restaurant.piatti_ordinabili
       }})
          
          let buttons = document.getElementsByClassName('addBtn')
@@ -47,15 +49,16 @@ Array.from(restaurants).forEach(element => {
          button.addEventListener('click', async event => { 
 
          let platesArr = []
-
+         let chosenPlate
 
          if(JSON.parse(sessionStorage.getItem('checkout')) && sessionStorage.getItem('restaurantName') == restaurantName){
          JSON.parse(sessionStorage.getItem('checkout')).forEach(plt => {platesArr.push(plt)})
-         
+         plates.forEach(p => {if(p.nome_piatto == event.target.parentNode.children[0].textContent) chosenPlate = p})
+
          let plate = {
-            name: event.target.parentNode.children[0].textContent,
-            minutes: event.target.parentNode.children[3].textContent,
-            price: event.target.parentNode.children[4].textContent
+            name: chosenPlate.nome_piatto,
+            minutes:chosenPlate.tempo_preparazione + ' mins',
+            price: chosenPlate.prezzo + '€'
             }
 
          console.log(plate)
@@ -71,13 +74,15 @@ Array.from(restaurants).forEach(element => {
             alert('Choose plates of the same restaurant')
          }
          else{
+         plates.forEach(p => {if(p.nome_piatto == event.target.parentNode.children[0].textContent) chosenPlate = p})
 
-            let plate = {
-               name: event.target.parentNode.children[0].textContent,
-               minutes: event.target.parentNode.children[3].textContent,
-               price: event.target.parentNode.children[4].textContent
+         let plate = {
+               name: chosenPlate.nome_piatto,
+               minutes:chosenPlate.tempo_preparazione + ' mins',
+               price: chosenPlate.prezzo + '€'
                }
-
+               
+            console.log(plate)
             platesArr.push(plate)
 
             sessionStorage.setItem('restaurantName', restaurantName)
