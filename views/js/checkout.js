@@ -28,7 +28,7 @@ checkout.addEventListener('click', async event => {
       let data = await distanceCalculater(recipientAddress, senderAddress)
 
       if(data.rows[0].elements[0].distance != undefined){
-      tmpDistanceArr = data.rows[0].elements[0].distance.text.split(' ')
+      tmpDistanceArr = data.rows[0].elements[0].distance.text.split(' ') //tmpDistanceArr = data.rows[0].elements[0].distance.text.replace(' km', '')
       tmpDistanceArr.splice(tmpDistanceArr.length, 1)
       tmpDistanceArr[0].replace(',','.')
 
@@ -196,7 +196,6 @@ function displayOrders(){
    totalTime.innerHTML += ' mins'
    
    deleteButtons = document.getElementsByClassName("delete")
-   console.log(deleteButtons)
    Array.from(deleteButtons).forEach(button => {
    button.addEventListener("click", event => {
       let name = event.target.parentNode.children[0].textContent
@@ -210,10 +209,13 @@ function displayOrders(){
             newPlates.push(plate)
          }
       })
+
       sessionStorage.setItem("checkout", JSON.stringify(newPlates))
+
       let n = sessionStorage.getItem("checkoutN")
       n--
       sessionStorage.setItem("checkoutN", n)
+
       if(n == 0){
          sessionStorage.removeItem("checkout")
          sessionStorage.removeItem("checkoutN")
