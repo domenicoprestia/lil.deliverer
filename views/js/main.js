@@ -6,7 +6,6 @@ let checkoutLink = document.getElementById('checkoutLink')
 
 let restaurantName 
 let restaurantAddress
-let piatti
 
 checkoutLink.addEventListener('click', event => {
    sessionStorage.setItem('checkoutN', checkoutN.innerHTML)
@@ -40,7 +39,6 @@ Array.from(restaurants).forEach(element => {
          restaurantName = maker.restaurant.nome
          restaurantAddress = maker.restaurant.address
          displayPlates(maker.restaurant.piatti_ordinabili)
-         piatti = maker.restaurant.piatti_ordinabili
       }})
          
          let buttons = document.getElementsByClassName('addBtn')
@@ -54,20 +52,10 @@ Array.from(restaurants).forEach(element => {
          if(JSON.parse(sessionStorage.getItem('checkout')) && sessionStorage.getItem('restaurantName') == restaurantName){
          JSON.parse(sessionStorage.getItem('checkout')).forEach(plt => {platesArr.push(plt)})
          
-         let choosenPlate
-
-         piatti.forEach(p => {
-            if(p.nome_piatto == event.target.parentNode.children[0].textContent){
-               choosenPlate = p
-            }
-
-         })
-         
-
          let plate = {
-            name: choosenPlate.nome_piatto,
-            minutes: choosenPlate.tempo_preparazione,
-            price: choosenPlate.prezzo
+            name: event.target.parentNode.children[0].textContent,
+            minutes: event.target.parentNode.children[3].textContent,
+            price: event.target.parentNode.children[4].textContent
             }
 
          console.log(plate)
@@ -83,7 +71,6 @@ Array.from(restaurants).forEach(element => {
             alert('Choose plates of the same restaurant')
          }
          else{
-            let platesArr = []
 
             let plate = {
                name: event.target.parentNode.children[0].textContent,

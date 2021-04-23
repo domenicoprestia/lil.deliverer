@@ -10,11 +10,7 @@ document.addEventListener('DOMContentLoaded', async event => {
    
    const usersArr = []
 
-<<<<<<< HEAD
-    await fetch('data/users.json').then(response => response.json()).then(data => { 
-=======
     await fetch('data/users.json').then(response => response.json()).then(data => { //trasforma risposta in un oggetto javascript - posso usare then
->>>>>>> 1dbe987ad709a1d6d9de806e16e71539132d7af4
         data.users.forEach(user => {user.maker = false; usersArr.push(user)})})
 
     await fetch('data/makers.json').then(response => response.json()).then(data => {

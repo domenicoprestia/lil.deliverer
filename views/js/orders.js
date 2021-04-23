@@ -25,6 +25,7 @@ function displayOrders(){
         }
     })
 
+    if(userOrders.length > 0){
     userOrders.forEach(order => {
         console.log(order)
 
@@ -57,4 +58,8 @@ function displayOrders(){
         </div>
         <hr class="mx-10">`
     })
+    }
+    else{
+        document.getElementById('title').textContent = 'You have no orders! ☁️'
+    }
 }
