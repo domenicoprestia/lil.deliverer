@@ -80,7 +80,7 @@ maker.addEventListener('click', function() {
         user = validatorProfile()
         const error = document.getElementById('error')
         error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email' && user != 'This username already exists') {
+        if (user.username) {
             main.innerHTML = formMInfos
 
             addressMaps();
@@ -109,7 +109,7 @@ lover.addEventListener('click', function() {
         user = validatorProfile()
         const error = document.getElementById('error')
         error.innerHTML = ''
-        if (user != 'check your password, it must be the same of confirm password and at least 8 char long' && user != 'insert valid username and email' && user != 'This username already exists') {
+        if (user.username) {
             main.innerHTML = formLInfos
 
             addressMaps();
